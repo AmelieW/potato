@@ -1,0 +1,222 @@
+{
+    "port": 9001,
+
+    "server_name": "potato annotator",
+
+    "annotation_task_name": "info_shifts",
+
+    # Potato will write the annotation file for all annotations to this
+    # directory, as well as per-annotator output files and state information
+    # necessary to restart annotation.
+    "output_annotation_dir": "projects/info_changes/annotation_output/",
+
+    # The output format for the all-annotator data. Allowed formats are:
+    # * jsonl
+    # * json (same output as jsonl)
+    # * csv
+    # * tsv
+    #
+    "output_annotation_format": "tsv",
+
+    # If annotators are using a codebook, this will be linked at the top to the
+    # instance for easy access
+    "annotation_codebook_url": "",
+
+    "data_files": [
+      "projects/info_changes/data/batch-01/score_5.tsv",
+    ],
+
+    "item_properties": {
+        "id_key": "id",
+        "text_key": "text"
+    },
+
+
+
+    "surveyflow": {
+      "on": true,
+      "order": [
+        "pre_annotation",
+        "post_annotation"
+      ],
+      "pre_annotation": [
+        "projects/info_changes/surveyflow/Welcome.jsonl",
+        "projects/info_changes/surveyflow/Task.jsonl",
+        "projects/info_changes/surveyflow/Consent.jsonl",
+        "projects/info_changes/surveyflow/Navigation.jsonl",
+      ],
+      "post_annotation": [
+          "projects/info_changes/surveyflow/Experience.jsonl",
+          "projects/info_changes/surveyflow/End.jsonl",
+
+
+      ],
+      "testing": [
+
+      ]
+    },
+
+
+
+    "user_config": {
+
+      "allow_all_users": True,
+      
+      "users": [  ],
+    },
+
+    #list_as_text is used when the input text is actually a list of texts, usually used for best-worst-scaling or dialogue analysis
+    "list_as_text": {
+      "text_list_prefix_type": 'none', #whether automatically insert a prefix for each line, currently supporting 'number', 'alphabet', 'number'
+      "horizontal": True,
+    },
+
+    "automatic_assignment": {
+      "on": true,
+      "output_filename": "task_assignment.json",
+      "sampling_strategy": "random",
+      "labels_per_instance": 3,
+      "instance_per_annotator": 5,
+      "test_question_per_annotator": 0,
+      "users": [ ]
+    },
+
+    # How many seconds do you want the annotators spend on each instance, after
+    # that, an alert will be sent per alert_time_each_instance seconds.
+    "alert_time_each_instance": 10000000,
+
+    "annotation_schemes": [
+      {
+        "annotation_type": "multiselect",
+        #"horizontal": True,
+        "name": "information-added-ommited",
+        "label_requirement": {"required":true},
+        "description": "1) Compared to the paper finding, the reported finding",
+        "labels": [
+          {"name":"adds information",
+          "tooltip": "More information was added, e.g., to explain something in more detail."
+          },
+          {
+            "name":"omits information",
+            "tooltip": "Details or other pieces of information were omitted, e.g., to simplify the finding."
+          },
+          {
+            "name": "paraphrases information",
+            "tooltip": "Information was paraphrased."
+          },
+          {
+            "name": "changes information",
+            "tooltip": "The content of the findings were changed."
+          },
+          {
+            "name": "does not change the information content",
+            "tooltip": "The information that is conveyed is identical."
+          },
+
+        ],
+
+        # If true, numbers [1-len(labels)] will be bound to each
+        # label. Aannotations with more than 10 are not supported with this
+        # simple keybinding and will need to use the full item specification
+        # to bind all labels to keys.
+        "sequential_key_binding": True,
+      },
+
+
+      {
+        "annotation_type": "highlight",
+        "name": "info_phrase",
+        #"label_requirement": {"required":true},
+        "description": "2) Choose a type of information change and highlight the phrases in which you observe differences in information.",
+        "labels": [
+          {
+            "name": "omitted information in the paper finding",
+            "tooltip": "Highlight the phrase(s) in the paper finding which are not covered in the reporting."
+          },
+          {
+            "name": "added information in the reporting",
+            "tooltip": "Highlight the phrase(s) in the reporting which are not covered in the paper finding."
+          },
+          {
+            "name": "paraphrasing",
+            "tooltip": "Highlight the phrase(s) in the reporting and the paper finding that are paraphrases of each other."
+          },
+          {
+            "name": "other changes",
+            "tooltip": "Highlight the phrase(s) in the reporting and the paper finding that convey changes information."
+          },
+
+
+        ],
+
+      },
+        {
+            "annotation_type": "multiselect",
+            "name": "reason",
+            #"label_requirement": {"required":true},
+            "description": "3) How did the information change?",
+            "labels": [
+              {
+                "name": "paraphrased to explain, clarify or simplify",
+                "tooltip": "E.g., Clarifying medical terminology: 'an increased risk of major bleeding' vs.
+                 'a high risk of developing strong bleeding"
+              },
+              {
+                "name": "change in certainty of the finding",
+                "tooltip": "E.g., 'The analysis suggests that papers with short titles receive more citations' vs.
+                                         'Papers with shorter titles get more citations'"
+              },
+              {
+                "name": "findings are exaggerated",
+                "tooltip": "E.g., 'Stress levels are higher in offices exposed to traffic noise' vs.
+                                                       'Traffic noise is the cause of high stress levels'"
+              },
+              {
+                "name": "results are downplayed",
+                "tooltip": "E.g., the opposite of an exaggeration. 'For all participants there was a direct connection between
+                traffic noise and stress levels.' vs. 'Traffic noise may increase stress level in some participants'."
+              },
+              {
+                "name": "contains factual inaccuracies",
+                "tooltip": "E.g., incorrect numeric values or scientific terms: 'typically between 30 and 50 %' vs. 
+                'show about 40-60 percent'"
+              },
+              {
+                "name": "other",
+                "tooltip": "If none of the categories apply, describe how the information changes in the comment field."
+              },
+            ],
+
+            # If true, numbers [1-len(labels)] will be bound to each
+            # label. Aannotations with more than 10 are not supported with this
+            # simple keybinding and will need to use the full item specification
+            # to bind all labels to keys.
+            "sequential_key_binding": True,
+
+            "has_free_response": {
+              "instruction": "Comments (optional):"
+            }
+        },
+
+
+    ],
+
+    # The html that changes the visualiztation for your task. Change this file
+    # to influence the layout and description of your task. This is not a full
+    # HTML page, just the piece that does lays out your task's pieces
+    "html_layout": "templates/examples/plain_layout.html",
+
+    # The core UI files for Potato. You should not need to change these normally.
+    #
+    # Exceptions to this might include:
+    # 1) You want to add custom CSS/fonts to style your task
+    # 2) Your layout requires additional JS/assets to render
+    # 3) You want to support additional keybinding magic
+    #
+    "base_html_template": "templates/base_template.html",
+    "header_file": "templates/header.html",
+
+    # This is where the actual HTML files will be generated
+    "site_dir": "potato/templates/",
+
+}
