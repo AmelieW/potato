@@ -20,7 +20,7 @@
 
     # If annotators are using a codebook, this will be linked at the top to the
     # instance for easy access
-    "annotation_codebook_url": "",
+    "annotation_codebook_url": "https://docs.google.com/document/d/1So6ZdEwNphl8zL3IiNvQNCjUL7WDzvtl38OkTD50JXE/edit?usp=sharing",
 
     "data_files": [
       "projects/info_changes/data/pilot/medicine/score_[4, 5].tsv",
@@ -86,21 +86,21 @@
     "alert_time_each_instance": 10000000,
 
     "annotation_schemes": [
-      # Changes in key entities & generalization
+      # Changes in key elements & generalization
       {
         "annotation_type": "radio",
         "name": "changes-key-entity",
         "label_requirement": {"required":true},
-        "description": "1a. The reported finding changes a key entity (e.g., affected demographics, variables, treatments) compared to the paper finding.",
+        "description": "1a. Compared to the paper finding, the reported finding changes one or more key elements (e.g., affected people or demographics, components, variables, treatments).",
         "horizontal": True,
         "labels": [
           {
             "name": "yes",
-            "tooltip": "Key entities from the paper finding are changed. E.g., reporting that a finding applies to teenagers as opposed to toddlers or generalizing from dietary magnesium to unspecified magnesium intake."
+            "tooltip": "Key elements from the paper finding are changed. E.g., reporting that a finding applies to teenagers as opposed to toddlers or generalizing from dietary magnesium to unspecified magnesium intake."
           },
           {
             "name": "no",
-            "tooltip": "The reporting accurately covers all key entities."
+            "tooltip": "The reporting accurately covers all key elements."
           }
 
         ],
@@ -110,12 +110,33 @@
         # specification to bind all labels to keys.
         "sequential_key_binding": True,
       },
+
       {
         "annotation_type": "highlight",
-        "name": "key-entities",
-        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Double-click the highlighted section to delete your annotation.">1b. Highlight the entities that have been changed.</span>',
+        "name": "key-elements-added-in-reporting",
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">1b. Click on the checkbox and mark the elements in the reported finding was added compared to the paper finding.</span>',
         "labels": [
-          "Missing entity from the reported finding.", "Added entity in reported finding"
+          {
+            "name": "Added element in reported finding.",
+            "tooltip": ""
+          }
+        ],
+
+        # If true, numbers [1-len(labels)] will be bound to each
+        # label. Highlight selection annotations with more than 10 are not supported
+        # with this simple keybinding and will need to use the full item
+        # specification to bind all labels to keys.
+        "sequential_key_binding": True,
+      },
+      {
+        "annotation_type": "highlight",
+        "name": "key-elements-missing-in-the-reporting",
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">1c. Click on the checkbox and mark the elements in the paper finding that are missing in the reported finding.</span>',
+        "labels": [
+          {
+            "name": "Missing element from the reported finding.",
+            "tooltip": ""
+          }
         ],
 
         # If true, numbers [1-len(labels)] will be bound to each
@@ -134,7 +155,7 @@
           "labels": [
             {
               "name": "yes",
-              "tooltip": "E.g., the reporting generalizes a finding about diabetes type 2 in seniors to all people with diabetes."
+              "tooltip": "E.g., the reporting generalizes a finding about diabetes type 2 in seniors to all people with diabetes. Or generalizing from a specified set of medical conditions ('reduced risk of stroke, heart failure, diabetes') to a general statement ('has health benefits').)"
             },
             {
               "name": "no",
@@ -150,8 +171,8 @@
 
         {
             "annotation_type": "highlight",
-            "name": "key-entities",
-            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Double-click the highlighted section to delete your annotation.">2b. Highlight the parts of the text where you habve identified the generalization.</span>',
+            "name": "key-elements",
+            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">2b. Click the checkbox and mark the words or phrases in the reported finding that express the generalization.</span>',
             "labels": [
                 "Generalization"
             ],
@@ -174,7 +195,7 @@
             "label_requirement": {"required":true},
 
           # This text is shown to the user and can be a longer statement
-            "description": "3a. In the reported finding, how do you rate the level of certainty used to describe the finding?",
+            "description": "3a. In the reported finding, how do you rate the level of certainty the author uses to describe the finding?",
 
 
             "labels": [
@@ -188,7 +209,7 @@
                 },
                 {
                     "name": "Can't say",
-                    "tooltip": "Neither certain nor uncertain."
+                    "tooltip": "Neither certain or uncertain."
                 },
                 {
                     "name": "Somewhat certain",
@@ -215,7 +236,7 @@
             "label_requirement": {"required":true},
 
           # This text is shown to the user and can be a longer statement
-            "description": "3b. In the paper finding, how do you rate the level of certainty used to describe the finding?",
+            "description": "3b. In the paper finding, how do you rate the level of certainty the author uses to describe the finding?",
 
             "labels": [
               {
@@ -228,7 +249,7 @@
               },
               {
                 "name": "Can't say",
-                "tooltip": "Neither certain nor uncertain."
+                "tooltip": "Neither certain or uncertain."
               },
               {
                 "name": "Somewhat certain",
@@ -250,16 +271,32 @@
         {
             "annotation_type": "highlight",
             "name": "certainty",
-            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Double-click the highlighted section to delete your annotation.">3c. Highlight the words or phrases that make the sentence more or less certain.</span>',
+            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">3c. Click the checkbox and mark the words or phrases in the reported or paper finding that express the author''s certainty.</span>',
             "labels": [
+
               {
-                "name": "certain",
-                "tooltip": "This could be words like 'definitively', 'clearly', 'conclusively','undoubtedly'."
-              },
-              {
-                "name": "uncertain",
-                "tooltip": "This could be hedges like 'may', 'to some extend', 'probably', 'potentially', 'sometimes'."
+                "name": "Certainty",
+                "tooltip": "This could be words like 'definitively', 'clearly', 'conclusively','undoubtedly'"
               }
+
+            ],
+
+          # If true, numbers [1-len(labels)] will be bound to each
+          # label. Highlight selection annotations with more than 10 are not supported
+          # with this simple keybinding and will need to use the full item
+          # specification to bind all labels to keys.
+            "sequential_key_binding": True,
+        },
+
+        {
+            "annotation_type": "highlight",
+            "name": "uncertainty",
+            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">3d.  Click the checkbox and mark the words or phrases in the reported or paper finding that express the author''s uncertainty.</span>',
+            "labels": [
+                {
+                    "name": "Uncertainty",
+                    "tooltip": "This could be hedges like 'may', 'to some extent', 'probably', 'potentially', 'sometimes'."
+                }
 
             ],
 
@@ -277,17 +314,22 @@
         "annotation_type": "radio",
         "name": "reporting-is-sensational",
         "label_requirement": {"required":true},
-        "description": "4a. The reported finding uses sensational language.",
-        "horizontal": True,
+        "description": "4a. In the reported finding, how sensational is the language?",
+        #"horizontal": True,
           "labels": [
             {
-              "name": "yes",
-              "tooltip": "Reporting uses sensationalist language or style that aims to grab the readers' attention. E.g., 'miracle treatment', 'breakthrough study', 'cure',  'game changer',  'groundbreaking',  'home run',  'life-changing',  'life-saving',  'marvel', 'revolutionary',  'transformative']"
+              "name": "Neutral",
+              "tooltip": "A neutral report of a scientific finding: 'Vitamin D intake can reduce stress.'"
             },
             {
-              "name": "no",
-              "tooltip": "The reported finding neutrally reports the paper finding."
-            }
+              "name": "Mostly neutral, slightly sensational",
+              "tooltip": "A mostly neutral report of a scientific finding, but with some minor elements of sensational language or entertaining tone: 'New research suggests that upping your vitamin D intake could be a simple solution to alleviate stress.'"
+            },
+            {
+              "name": "Sensational",
+              "tooltip": "A report of the finding that clearly uses sensationalist language used to grab the reader's attention: 'Revolutionary breakthrough: Experts have discovered that increasing your vitamin D intake can dramatically slash your stress levels!'"
+            },
+
           ],
         # If true, numbers [1-len(labels)] will be bound to each
         # label. Check box annotations with more than 10 are not supported
@@ -296,37 +338,42 @@
         "sequential_key_binding": True,
       },
 
-        {
-            "annotation_type": "radio",
-            "name": "reporting-is-sensational",
-            "description": "4b. The paper finding uses sensationalist language.",
-            "label_requirement": {"required":true},
-            "horizontal": True,
-            "labels": [
-                {
-                    "name": "yes",
-                    "tooltip": "Paper uses sensationalist language or style that aims to grab the readers' attention. E.g., 'miracle treatment', 'breakthrough study', 'cure',  'game changer',  'groundbreaking',  'home run',  'life-changing',  'life-saving',  'marvel', 'revolutionary',  'transformative']"
-                },
-                {
-                    "name": "no",
-                    "tooltip": "The paper neutrally reports the finding."
-                }
-            ],
-          # If true, numbers [1-len(labels)] will be bound to each
-          # label. Check box annotations with more than 10 are not supported
-          # with this simple keybinding and will need to use the full item
-          # specification to bind all labels to keys.
-            "sequential_key_binding": True,
-        },
+      {
+        "annotation_type": "radio",
+        "name": "paper-is-sensational",
+        "label_requirement": { "required": true },
+        "description": "4b. In the paper finding, how sensational is the language?",
+        #"horizontal": True,
+        "labels": [
+          {
+            "name": "Neutral",
+            "tooltip": "A neutrally reported scientific finding: 'The evidence supports a link between vitamin D intake and reduced stress.'"
+          },
+          {
+            "name": "Mostly neutral, slightly sensational",
+            "tooltip": "A mostly neutrally reported scientific finding, but with some minor elements of sensational language or entertaining tone: 'The empirical data provides compelling evidence that vitamin D supplementation can significantly alleviate stress levels, representing a groundbreaking discovery in stress management.'"
+          },
+          {
+            "name": "Sensational",
+            "tooltip": "A paper finding that makes clear use of sensationalist language used in an effort to grab the reader's attention: 'We find remarkable evidence that reveals that vitamin D supplementation can dramatically alleviate stress levels, unveiling a groundbreaking solution in stress management.'"
+          },
+
+        ],
+        # If true, numbers [1-len(labels)] will be bound to each
+        # label. Check box annotations with more than 10 are not supported
+        # with this simple keybinding and will need to use the full item
+        # specification to bind all labels to keys.
+        "sequential_key_binding": True,
+      },
 
         {
             "annotation_type": "highlight",
             "name": "sensational-language-cues",
-            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Double-click the highlighted section to delete your annotation.">4c. Highlight which words or phrases make the sentence sound sensationalist.</span>',
+            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">4c. Click on the checkbox and mark the words and phrases in the reported and/or paper finding that make the sentences sound sensationalist.</span>',
             "labels": [
               {
                 "name": "Sensational language",
-                "tooltip": "Sensationalist language or style that aims to grab the readers' attention. E.g., 'miracle treatment', 'breakthrough study', 'cure',  'game changer',  'groundbreaking',  'home run',  'life-changing',  'life-saving',  'marvel', 'revolutionary',  'transformative']"
+                "tooltip": "Sensationalist language or style that aims to grab the readers' attention. E.g., 'miracle treatment', 'breakthrough study', 'cure',  'game changer',  'groundbreaking',  'home run',  'life-changing',  'life-saving',  'marvel', 'revolutionary',  'transformative'"
               }
             ],
 
@@ -342,7 +389,7 @@
       {
         "annotation_type": "radio",
         "name": "how-causal-is-the-reporting",
-        "description": "5a. In the reported finding, what type of causal connection is described?",
+        "description": "5a. In the reported finding, what type of causal relationship is described?",
         "label_requirement": {"required":true},
 
         # If true, display the labels horizontally
@@ -355,11 +402,11 @@
           },
           {
             "name": "Correlation",
-            "tooltip": "The reported finding describes a correlation between two entities. E.g., 'Vitamin D levels are associated with extensive tiredness'"
+            "tooltip": "The reported finding describes a correlation between two elements. E.g., 'Vitamin D levels are associated with extensive tiredness'"
           },
           {
             "name": "Causation",
-            "tooltip": "The reported finding describes a causal relation between two entities. E.g., 'Low vitamin D levels cause extensive tiredness' or 'Tiredness might be caused by lack of vitamin D.'"
+            "tooltip": "The reported finding describes a causal relation between two elements. E.g., 'Low vitamin D levels cause extensive tiredness' or 'Tiredness might be caused by lack of vitamin D.'"
           },
         ],
         "sequential_key_binding": True,
@@ -369,9 +416,8 @@
       {
         "annotation_type": "radio",
         "name": "how-causal-is-the-paper-finding",
-        "description": "5b. In the paper finding, what type of causal connection is described?",
+        "description": "5b. In the paper finding, what type of causal relationship is described?",
         "label_requirement": {"required":true},
-
         # If true, display the labels horizontally
         "horizontal": True,
 
@@ -382,11 +428,11 @@
           },
           {
             "name": "Correlation",
-            "tooltip": "The paper finding describes a correlation between two entities. E.g., 'Vitamin D levels are associated with extensive tiredness'"
+            "tooltip": "The paper finding describes a correlation between two elements. E.g., 'Vitamin D levels are associated with extensive tiredness'"
           },
           {
             "name": "Causation",
-            "tooltip": "The paper finding describes a causal relation between two entities. E.g., 'Low vitamin D levels cause extensive tiredness' or 'Tiredness might be caused by lack of vitamin D.'"
+            "tooltip": "The paper finding describes a causal relation between two elements. E.g., 'Low vitamin D levels cause extensive tiredness' or 'Tiredness might be caused by lack of vitamin D.'"
           },
         ],
         "sequential_key_binding": True,
@@ -394,9 +440,13 @@
         {
             "annotation_type": "highlight",
             "name": "causality-reporting",
-            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Double-click the highlighted section to delete your annotation.">5c. Highlight the phrases that indicate the relation.</span>',
+            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">5c. Click on the checkbox and mark the words and phrases in the reported and/or the paper finding that express the causal relation.</span>',
             "labels": [
-                "correlation", "causation"
+              {
+                "name": "Causation",
+                "tooltip": "X causes Y. E.g., 'Overconsumption of sugar leads to diabetes.' "
+              },
+
             ],
 
           # If true, numbers [1-len(labels)] will be bound to each
@@ -405,6 +455,26 @@
           # specification to bind all labels to keys.
             "sequential_key_binding": True,
         },
+
+      {
+        "annotation_type": "highlight",
+        "name": "correlation-reporting",
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">5d. Click on the checkbox and mark the words and phrases in the reported and/or the paper finding that express the correlational relation.</span>',
+        "labels": [
+          {
+            "name": "Correlation",
+            "tooltip": "X is associated with Y. E.g., 'It is likely that there is a link between overconsumption of sugar and the onset of diabetes.'"
+          },
+
+
+        ],
+
+        # If true, numbers [1-len(labels)] will be bound to each
+        # label. Highlight selection annotations with more than 10 are not supported
+        # with this simple keybinding and will need to use the full item
+        # specification to bind all labels to keys.
+        "sequential_key_binding": True,
+      },
 
 
 
@@ -428,5 +498,22 @@
 
     # This is where the actual HTML files will be generated
     "site_dir": "potato/templates/",
+
+    "ui": {
+      "spans": {
+        "span_colors":
+          {
+            "Added element in reported finding.": "(204,121,167)",
+            "Missing element from the reported finding.": "(0, 114,178)",
+            "Generalization": "(213,94,0)",
+            "Certainty": "(240,228,66)",
+            "Uncertainty": "(0,158,115)",
+            "Sensational language": "(86,180,233)",
+            "Causation": "(230,159,0)",
+            "Correlation": "(78,76,74)"
+          }
+      }
+    }
+
 
 }

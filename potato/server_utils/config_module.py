@@ -3,9 +3,19 @@ Config module.
 """
 
 import yaml
+from copy import deepcopy
+#from .schemas import SingleConf
 
 config = {}
 
+class SingleConf:
+    __instance = None
+
+    def __new__(cls, *args, **kwargs):
+        print(cls.__instance)
+        if cls.__instance is None:
+            cls.__instance = super().__new__(cls)
+        return cls.__instance
 
 def init_config(args):
     global config
@@ -20,3 +30,7 @@ def init_config(args):
             "__config_file__": args.config_file,
         }
     )
+
+    single = SingleConf()
+    single.conf = deepcopy(config)
+

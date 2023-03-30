@@ -24,8 +24,10 @@ from flask import Flask, render_template, request
 from bs4 import BeautifulSoup
 
 from create_task_cli import create_task_cli, yes_or_no
-from server_utils.arg_utils import arguments
-from server_utils.config_module import init_config, config
+from potato.server_utils.arg_utils import arguments
+from potato.server_utils.config_module import init_config, config, SingleConf
+#from server_utils.schemas import SingleConf
+
 from server_utils.front_end import generate_site, generate_surveyflow_pages
 from server_utils.schemas.span import render_span_annotations
 
@@ -1937,6 +1939,7 @@ def annotate_page(username=None, action=None):
     if span_annotations is not None and len(span_annotations) > 0:
         # Mark up the instance text where the annotated spans were
         text = render_span_annotations(text, span_annotations)
+        print(text)
 
     # If the admin has specified that certain keywords need to be highlighted,
     # post-process the selected instance so that it now also has colored span
@@ -2474,6 +2477,11 @@ def run_server():
 
     args = arguments()
     init_config(args)
+    #print(id(SingleConf))
+    #a = SingleConf()
+    #print(a.__dict__)
+
+
     if config.get("verbose"):
         logger.setLevel(logging.DEBUG)
     if config.get("very_verbose"):
@@ -2509,6 +2517,8 @@ def run_server():
     # Loads the training data
     load_all_data(config)
 
+
+
     # load users with annotations to user_to_annotation_state
     users_with_annotations = [
         f
@@ -2533,7 +2543,6 @@ def main():
     if len(sys.argv) == 1:
         # Run task configuration script if no arguments are given.
         return run_create_task_cli()
-
     run_server()
 
 

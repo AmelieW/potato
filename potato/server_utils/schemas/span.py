@@ -3,8 +3,9 @@ Span Layout
 """
 
 import logging
+import random
 from collections.abc import Mapping
-from potato.server_utils.config_module import config
+from potato.server_utils.config_module import config, init_config, SingleConf
 
 logger = logging.getLogger(__name__)
 
@@ -40,13 +41,22 @@ def get_span_color(span_label):
     Returns the color of a span with this label as a string with an RGB triple
     in parentheses, or None if the span is unmapped.
     """
+
+    print(id(SingleConf))
+    s_conf = SingleConf()
+    config = s_conf.conf
+    print('_________________')
+
     if "ui" not in config or "spans" not in config["ui"]:
+        print("NONE")
         return None
     span_ui = config["ui"]["spans"]
+    print(f"span_ui: {span_ui}")
 
     if "span_colors" not in span_ui:
         return None
 
+    print(span_label)
     if span_label in span_ui["span_colors"]:
         return span_ui["span_colors"][span_label]
     else:
@@ -77,6 +87,11 @@ def set_span_color(span_label, color):
     else:
         span_colors = span_ui["span_colors"]
 
+    # print(config["ui"])
+    # with open("conf.json", "a+") as f:
+    # import json
+    # json.dump(config, f)
+
     span_colors[span_label] = color
 
 
@@ -103,18 +118,21 @@ def render_span_annotations(text, span_annotations):
     rev_order_sa = sorted(span_annotations, key=lambda d: d["start"], reverse=True)
 
     ann_wrapper = (
-        '<span class="span_container" selection_label="{annotation}" '
-        + 'style="background-color:rgb{bg_color};">'
-        + "{span}"
-        + '<div class="span_label" '
-        + 'style="background-color:white;border:2px solid rgb{color};">'
-        + "{annotation}</div></span>"
+            '<span class="span_container" selection_label="{annotation}" '
+            + 'style="background-color:rgb{bg_color};">'
+            + "{span}"
+            + '<div class="span_label" '
+            + 'style="background-color:white;border:2px solid rgb{color};">'
+            + "{annotation}</div></span>"
     )
-    for a in rev_order_sa:
 
+    # avail_colors = ["(230,230,250)", "(230, 25, 75)","(250,218,94)", "(128,128,0)", "(219,112,147)"]
+    for a in rev_order_sa:
         # Spans are colored according to their order in the list and we need to
         # retrofit the color
         color = get_span_color(a["annotation"])
+        # color = random.choice(avail_colors)
+        print(color)
         # The color is an RGB triple like (1,2,3) and we want the background for
         # the text to be somewhat transparent so we switch to RGBA for bg
         bg_color = color.replace(")", ",0.25)")
@@ -122,9 +140,12 @@ def render_span_annotations(text, span_annotations):
         ann = ann_wrapper.format(
             annotation=a["annotation"], span=a["span"], color=color, bg_color=bg_color
         )
-        text = text[: a["start"]] + ann + text[a["end"] :]
+        text = text[: a["start"]] + ann + text[a["end"]:]
 
     return text
+
+
+global_conf = None
 
 
 def generate_span_layout(annotation_scheme, horizontal=False):
@@ -137,9 +158,9 @@ def generate_span_layout(annotation_scheme, horizontal=False):
         horizontal = True
 
     schematic = (
-        '<form action="/action_page.php">'
-        + "  <fieldset>"
-        + ("  <legend>%s</legend>" % annotation_scheme["description"])
+            '<form action="/action_page.php">'
+            + "  <fieldset>"
+            + ("  <legend>%s</legend>" % annotation_scheme["description"])
     )
 
     # TODO: display keyboard shortcuts on the annotation page
@@ -172,7 +193,6 @@ def generate_span_layout(annotation_scheme, horizontal=False):
         # somewhere so that we can render them in the colored instances later in
         # render_span_annotations(). The config object seems like a reasonable
         # place to do since it's global and the colors are persistent
-        config["ui"]
 
         tooltip = ""
         if isinstance(label_data, Mapping):
@@ -187,8 +207,8 @@ def generate_span_layout(annotation_scheme, horizontal=False):
                 # print('file: ', tooltip_text)
             if len(tooltip_text) > 0:
                 tooltip = (
-                    'data-toggle="tooltip" data-html="true" data-placement="top" title="%s"'
-                    % tooltip_text
+                        'data-toggle="tooltip" data-html="true" data-placement="top" title="%s"'
+                        % tooltip_text
                 )
 
             # Bind the keys
@@ -203,9 +223,9 @@ def generate_span_layout(annotation_scheme, horizontal=False):
             # print(key_value)
 
         if (
-            "sequential_key_binding" in annotation_scheme
-            and annotation_scheme["sequential_key_binding"]
-            and len(annotation_scheme["labels"]) <= 10
+                "sequential_key_binding" in annotation_scheme
+                and annotation_scheme["sequential_key_binding"]
+                and len(annotation_scheme["labels"]) <= 10
         ):
             key_value = str(i % 10)
             key2label[key_value] = label
@@ -236,11 +256,11 @@ def generate_span_layout(annotation_scheme, horizontal=False):
         name_with_span = "span_label:::" + name
 
         schematic += (
-            '      <input class="{class_name}" type="checkbox" id="{name}" name="{name_with_span}" '
-            + ' value="{key_value}" {is_checked} '
-            + "onclick=\"onlyOne(this); changeSpanLabel(this, '{label_content}', '{span_color}');\">"
-            + '  <label for="{name}" {tooltip}>'
-            + '<span style="background-color:rgb{bg_color};">{label_content}</span></label>{br_label}'
+                '      <input class="{class_name}" type="checkbox" id="{name}" name="{name_with_span}" '
+                + ' value="{key_value}" {is_checked} '
+                + "onclick=\"onlyOne(this); changeSpanLabel(this, '{label_content}', '{span_color}');\">"
+                + '  <label for="{name}" {tooltip}>'
+                + '<span style="background-color:rgb{bg_color};">{label_content}</span></label>{br_label}'
         ).format(
             class_name=class_name,
             name=name,
