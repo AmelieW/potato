@@ -45,18 +45,18 @@ def get_span_color(span_label):
     print(id(SingleConf))
     s_conf = SingleConf()
     config = s_conf.conf
-    print('_________________')
+    #print('_________________')
 
     if "ui" not in config or "spans" not in config["ui"]:
         print("NONE")
         return None
     span_ui = config["ui"]["spans"]
-    print(f"span_ui: {span_ui}")
+    #print(f"span_ui: {span_ui}")
 
     if "span_colors" not in span_ui:
         return None
 
-    print(span_label)
+    #print(span_label)
     if span_label in span_ui["span_colors"]:
         return span_ui["span_colors"][span_label]
     else:
@@ -122,11 +122,10 @@ def render_span_annotations(text, span_annotations):
             + 'style="background-color:rgb{bg_color};">'
             + "{span}"
             + '<div class="span_label" '
-            + 'style="background-color:white;border:2px solid rgb{color};">'
+            + 'style="background-color:white;border:2px solid rgb{color}; line-height: 100%;">'
             + "{annotation}</div></span>"
     )
 
-    # avail_colors = ["(230,230,250)", "(230, 25, 75)","(250,218,94)", "(128,128,0)", "(219,112,147)"]
     for a in rev_order_sa:
         # Spans are colored according to their order in the list and we need to
         # retrofit the color

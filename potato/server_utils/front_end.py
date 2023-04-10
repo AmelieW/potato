@@ -243,8 +243,11 @@ def generate_site(config):
     codebook_html = ""
     if len(config.get("annotation_codebook_url", "")) > 0:
         annotation_codebook = config["annotation_codebook_url"]
+        print(annotation_codebook)
         codebook_html = '<a href="{{annotation_codebook_url}}" class="nav-item nav-link">Annotation Codebook</a>'
+        print(codebook_html)
         codebook_html = codebook_html.replace("{{annotation_codebook_url}}", annotation_codebook)
+        print(codebook_html)
 
     #
     # Step 3, drop in the annotation layout and insert the rest of the task-specific variables
