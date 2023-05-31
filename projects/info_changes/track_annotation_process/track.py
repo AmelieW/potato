@@ -60,6 +60,7 @@ def run(args):
         all_annotations.append(annotator)
 
     stats =instance_stats(all_annotations)
+    print(type(stats))
 
     # for each instance id, get the annotations for this instacne grouped
     instance_groups = group_instances_wrt_id(all_annotations)
