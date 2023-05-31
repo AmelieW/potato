@@ -135,6 +135,7 @@ def instance_stats(list_of_annotators):
             else:
                 i[inst.id] += 1
     print(i)
+    return i
     """print([id for id in i.keys()])
     print(len([id for id in i.keys()]))"""
 
