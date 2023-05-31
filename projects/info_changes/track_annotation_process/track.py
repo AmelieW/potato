@@ -60,8 +60,7 @@ def run(args):
 
     # for each instance id, get the annotations for this instacne grouped
     instance_groups = group_instances_wrt_id(all_annotations)
-    for g in instance_groups:
-        print(g)
+    
 
 
 
