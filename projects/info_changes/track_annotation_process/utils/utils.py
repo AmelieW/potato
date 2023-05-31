@@ -135,8 +135,8 @@ def instance_stats(list_of_annotators):
             else:
                 i[inst.id] += 1
     print(i)
-    print([id for id in i.keys()])
-    print(len([id for id in i.keys()]))
+    """print([id for id in i.keys()])
+    print(len([id for id in i.keys()]))"""
 
 def group_instances_wrt_id(list_of_annotators):
     grouped = {}
