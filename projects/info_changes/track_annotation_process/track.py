@@ -19,7 +19,7 @@ def parse_args():
 
     return parser.parse_args()
 
-def run():
+def run(args):
     """starts the eval pipeline"""
 
     all_annotations = []
@@ -28,7 +28,7 @@ def run():
     L = os.listdir(args.directory)
     # make sure the list only contains directories with prolific ids as names:
     L = [l for l in L if len(l) == 24]
-    
+
 
     for prolific_id in L:
         file = f"{P}{prolific_id}/annotated_instances.jsonl"
