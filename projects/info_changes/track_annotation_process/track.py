@@ -81,6 +81,12 @@ def run(args):
     for id, num in stats.items():
         print(f"{id}: {num}")
 
+    print(f"Instances that have not been labeled yet: {len(not_yet_labeled)}")
+
+    for r in range(args.num_of_labels_per_instance):
+        print(f"num of labels so far {r+1}")
+        print(len([k for k, v in stats.items() if v == r]))
+
 
 
 
