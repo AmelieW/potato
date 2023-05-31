@@ -3,12 +3,7 @@ import pandas as pd
 import os
 import argparse
 
-#L = ['5caad602a15c9800161ad6d3', '61671c6dc5d5587bdaf08989', '6303814dfe5bbd0b827d10b4', '5e8783b0fde5153fbd9dca43', '5f0448506587140241493cbe', '60dc54db60a4dca481ba3608', '61001309835f7fddeb965ea9', '60cf529b26650af60dbc0440', '60ccbcfaa216558af6d8bf0e', '60a2d1593f270f92fa69305d']
-#P= "/Users/amelie/Documents/1_Uni/Promotion/admin/research-stay/information-changes/data/anno-environment/potato/projects/info_changes/pilot/batch-1_annotation_output/"
-#5e820a415b6ebc01e6cd81a8/annotated_instances.jsonl"
 
-P= "/Users/amelie/Documents/1_Uni/Promotion/admin/research-stay/information-changes/data/anno-environment/potato/projects/info_changes/pilot/batch-2_annotation_output/"
-L = ['5ce33217f1117f0017c80de1', '60d3867b6e7529fc77032b54', '6168926c2ebd65e2f7eee82c', '5c1bb460a05a64000125c522', '5c131126d6d169000148414a', '60e2ebb6ad1d5ee0e515a7c5', '614dd12e1864621b9d8436ac', '5f96b94504b0720009b4a1ed', '6072e4e6236de7ca7d4bf06e', '61747e90d6980cdffa3de99d', '5fdf4ff8b112b67125e0b2b1', '61572a3b2955ccd1969daecd', '5d6d15ce424136001af41fbc']
 def parse_args():
     # use the argparse module to parse commandline arguments
 
@@ -33,7 +28,7 @@ def run(args):
 
 
     for prolific_id in L:
-        file = f"{P}{prolific_id}/annotated_instances.jsonl"
+        file = f"{args.directory}{prolific_id}/annotated_instances.jsonl"
 
         print(f"Reading in data from {file}")
 
