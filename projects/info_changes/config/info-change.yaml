@@ -208,11 +208,11 @@
             "labels": [
                 {
                     "name": "Uncertain",
-                    "tooltip": "E.g., 'Sunscreen might prevent skin cancer.'"
+                    "tooltip": "E.g., 'Sunscreen might prevent skin cancer.' or 'Overconsumption of sugar may have negative effects on health.'"
                 },
                 {
                     "name": "Somewhat uncertain",
-                    "tooltip": "E.g., 'Sunscreen could prevent skin cancer.'"
+                    "tooltip": "E.g., 'Sunscreen could prevent skin cancer.' or 'Overconsumption of sugar can cause diabetes.'"
                 },
                 {
                     "name": "Can't say",
@@ -220,11 +220,11 @@
                 },
                 {
                     "name": "Somewhat certain",
-                    "tooltip": "E.g., 'Sunscreen can prevent skin cancer.'"
+                    "tooltip": "E.g., 'Sunscreen can prevent skin cancer.' or 'The analysis suggests that papers with short titles receive more citations'"
                 },
                 {
                     "name": "Certain",
-                    "tooltip": "E.g., 'Sunscreen prevents skin cancer.'"
+                    "tooltip": "E.g., 'Sunscreen prevents skin cancer.' or 'Papers with shorter titles get more citations'"
                 },
             ],
 
