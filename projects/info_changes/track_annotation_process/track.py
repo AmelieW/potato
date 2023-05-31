@@ -11,6 +11,9 @@ def parse_args():
     # add argument for the directory with the annotation output
     parser.add_argument('-d', '--directory', type=str, required=True,
                         help='the directory with the annotation output')
+    parser.add_argument('--to-be-labeled', type=str, required=True,
+                        help='the directory with the instances that we want annotated')
+    parser.add_argument('--num-of-labels-per-instance', type=int, required=True)
 
     return parser.parse_args()
 
@@ -56,11 +59,28 @@ def run(args):
 
         all_annotations.append(annotator)
 
-    instance_stats(all_annotations)
+    stats =instance_stats(all_annotations)
 
     # for each instance id, get the annotations for this instacne grouped
     instance_groups = group_instances_wrt_id(all_annotations)
-    
+
+    # get the instances that we want to be labeled:
+    instances_to_be_labeled = pd.read_csv(args.to_be_labeled, sep="\t")
+    instance_ids = instances_to_be_labeled["id"].tolist()
+
+    # compare the instance ids that we want to be labeled with the instance ids that were labeled:
+    not_yet_labeled = []
+    for id in instance_ids:
+        if id not in stats.keys():
+            not_yet_labeled.append(id)
+            stats[id]= 0
+
+    # pretty print the stats dictionary:
+    print("Stats:")
+    for id, num in stats.items():
+        print(f"{id}: {num}")
+
+
 
 
 
