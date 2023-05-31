@@ -24,6 +24,8 @@ def run(args):
 
     all_annotations = []
 
+    print(f"Reading in data from {args.directory}")
+
     # create a list of all Prolific Ids in the directory:
     L = os.listdir(args.directory)
     # make sure the list only contains directories with prolific ids as names:
@@ -33,12 +35,16 @@ def run(args):
     for prolific_id in L:
         file = f"{P}{prolific_id}/annotated_instances.jsonl"
 
+        print(f"Reading in data from {file}")
+
         # check if the annotator did anything (this removes people who returned from the study without doing anything)
         if not os.path.exists(file):
+            print("File does not exist. Skipping.")
             continue
 
         #create Annotator obj.
         annotator = Annotator(prolific_id)
+        print("Annotator created.")
 
         # read in their data:
         df = pd.read_json(file, lines=True)
