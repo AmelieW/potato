@@ -1893,7 +1893,7 @@ def annotate_page(username=None, action=None):
         if result_code == "all instances have been assigned":
             return render_template(
                 "error.html",
-                error_message="Sorry that you come a bit late. We have collected enough responses for our study. However, prolific sometimes will recruit more participants than we expected. We are sorry for the inconvenience!",
+                error_message="Sorry that you come a bit late. We have collected enough responses for our study. However, prolific sometimes will recruit more participants than we expected. We are sorry for the inconvenience! Please return your submission. This effectively hands the study back and makes sure you won't receive an unwarranted rejection: Close the study and under Submissions, you’ll have the option to ‘return’ the study instead by selecting the red circular arrow to 'Return + cancel reward'.",
             )
 
     elif action == "prev_instance":
