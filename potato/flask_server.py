@@ -2075,7 +2075,9 @@ def parse_html_span_annotation(html_span_annotation):
               and a list of annotations    
     """
     s = html_span_annotation.strip()
-    init_tag_regex = re.compile(r"(<span.+?>)")
+    #print(f"s: {s}")
+    #init_tag_regex = re.compile(r"(<span.+?>)")
+    init_tag_regex = re.compile(r"(<span class.+?>)")
     end_tag_regex = re.compile(r"(</span>)")
     anno_regex = re.compile(r'<div class="span_label".+?>(.+)</div>')
     no_html_s = ""
@@ -2087,14 +2089,17 @@ def parse_html_span_annotation(html_span_annotation):
         m = init_tag_regex.search(s, start)
         if not m:
             break
-
+        #print(f"m: {m}")
         # find the end tag
         m2 = end_tag_regex.search(s, m.end())
+        #print(f"m2: {m2}")
 
         middle = s[m.end() : m2.start()]
+        #print(f"middle: {middle}")
 
         # Get the annotation label from the middle text
         m3 = anno_regex.search(middle)
+        #print(f"m3: {m3}")
 
         middle_text = middle[: m3.start()]
         annotation = m3.group(1)

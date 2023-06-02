@@ -23,10 +23,11 @@
     "annotation_codebook_url": "https://docs.google.com/document/d/1CUKSLpmGGH_eGlaFypyD1UKZ1chKvkNIi0FOGEddWcU/edit?usp=sharing",
 
     "data_files": [
-      "projects/info_changes/data/main/medicine/score_[4,5]_batch_1.tsv",
+      #"projects/info_changes/data/main/medicine/score_[4,5]_batch_1.tsv",
       #"projects/info_changes/data/pilot/medicine/score_[4, 5]_batch_2_leftover_a.tsv",
       #"projects/info_changes/data/pilot/medicine/score_[4, 5]_batch_2_leftover_b.tsv",
       #"projects/info_changes/data/pilot/medicine/score_[4, 5]_batch_2.tsv",
+      "projects/info_changes/data/pilot/medicine/score_[4, 5]_batch_2_fixed_context.tsv",
       #"projects/info_changes/data/pilot/medicine/score_[4, 5]_one_anno_needed_pilot1-5.tsv",
     #"projects/info_changes/data/pilot/medicine/score_[4, 5]_one_anno_needed.tsv",
     #"projects/info_changes/data/pilot/medicine/score_[4, 5]_two_anno_needed.tsv",
