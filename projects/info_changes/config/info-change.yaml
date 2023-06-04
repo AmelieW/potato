@@ -20,17 +20,11 @@
 
     # If annotators are using a codebook, this will be linked at the top to the
     # instance for easy access
-    "annotation_codebook_url": "https://docs.google.com/document/d/1CUKSLpmGGH_eGlaFypyD1UKZ1chKvkNIi0FOGEddWcU/edit?usp=sharing",
+    "annotation_codebook_url": "https://docs.google.com/document/d/1CUKSLpmGGH_eGlaFypyD1UKZ1chKvkNIi0FOGEddWcU/edit#bookmark=kix.1dvejtjjjj4z",
 
     "data_files": [
-      #"projects/info_changes/data/main/medicine/score_[4,5]_batch_1.tsv",
-      #"projects/info_changes/data/pilot/medicine/score_[4, 5]_batch_2_leftover_a.tsv",
-      #"projects/info_changes/data/pilot/medicine/score_[4, 5]_batch_2_leftover_b.tsv",
-      #"projects/info_changes/data/pilot/medicine/score_[4, 5]_batch_2.tsv",
-      "projects/info_changes/data/pilot/medicine/score_[4, 5]_batch_2_fixed_context.tsv",
-      #"projects/info_changes/data/pilot/medicine/score_[4, 5]_one_anno_needed_pilot1-5.tsv",
-    #"projects/info_changes/data/pilot/medicine/score_[4, 5]_one_anno_needed.tsv",
-    #"projects/info_changes/data/pilot/medicine/score_[4, 5]_two_anno_needed.tsv",
+    #"projects/info_changes/data/paper-example.tsv",
+      "projects/info_changes/data/pilot/medicine/score_[4, 5]_batch_3_fixed_context.tsv",
     ],
 
     "item_properties": {
@@ -99,7 +93,7 @@
         "annotation_type": "radio",
         "name": "changes-key-entity",
         "label_requirement": {"required":true},
-        "description": "1a. Compared to the paper finding, the reported finding changes one or more key elements (e.g., affected people or demographics, components, variables, treatments).",
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Findings usually mention key elements or components of a study. Key elements could be affected people or demographics, objects or other components or variables in the finding.">1a. Compared to the paper finding, the reported finding changes one or more key elements (e.g., affected people or demographics, components, variables, treatments).</span>',
         "horizontal": True,
         "labels": [
           {
@@ -157,7 +151,7 @@
       {
         "annotation_type": "radio",
         "name": "Level-of-generality",
-        "description": "2a. The reported finding generalizes the results while the paper is more specific.",
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Generalizations are statements or elements in statements which claim that something is true all the time or for all instances which it is only true in some cases or sometimes.">2a. The reported finding generalizes the results while the paper is more specific.</span>',
         "label_requirement": {"required":true},
         "horizontal": True,
           "labels": [
@@ -203,17 +197,17 @@
             "label_requirement": {"required":true},
 
           # This text is shown to the user and can be a longer statement
-            "description": "3a. In the reported finding, how do you rate the level of certainty the author uses to describe the finding?",
+            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Certainty or uncertainty can be expressed with respect to various aspects. Things to look out for include: (un)certainty towards specific numbers/quantities (They found that approximately 50 % of participants …), the extent to which a given finding applies (The effect was mainly observed for teenagers.), the probability that something applies, occurs or is associated (... is possibly associated with …).">3a. In the reported finding, how do you rate the level of certainty the author uses to describe the finding?</span>',
 
 
             "labels": [
                 {
                     "name": "Uncertain",
-                    "tooltip": "E.g., 'Sunscreen might prevent skin cancer.' or 'Overconsumption of sugar may have negative effects on health.'"
+                    "tooltip": "E.g., 'Sunscreen might prevent skin cancer.' or 'Overconsumption of sugar may have negative effects on health.', 'Further research is necessary to understand ...'"
                 },
                 {
                     "name": "Somewhat uncertain",
-                    "tooltip": "E.g., 'Sunscreen could prevent skin cancer.' or 'Overconsumption of sugar can cause diabetes.'"
+                    "tooltip": "E.g., 'Sunscreen could prevent skin cancer.' or 'Overconsumption of sugar can cause diabetes.', 'The functionality possibly depends on ....'"
                 },
                 {
                     "name": "Can't say",
@@ -225,7 +219,7 @@
                 },
                 {
                     "name": "Certain",
-                    "tooltip": "E.g., 'Sunscreen prevents skin cancer.' or 'Papers with shorter titles get more citations'"
+                    "tooltip": "E.g., 'Sunscreen prevents skin cancer.' or 'Papers with shorter titles get more citations', '... meaning that this treatment should be used ...'"
                 },
             ],
 
@@ -244,16 +238,16 @@
             "label_requirement": {"required":true},
 
           # This text is shown to the user and can be a longer statement
-            "description": "3b. In the paper finding, how do you rate the level of certainty the author uses to describe the finding?",
+            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Certainty or uncertainty can be expressed with respect to various aspects. Things to look out for include: (un)certainty towards specific numbers/quantities (They found that approximately 50 % of participants …), the extent to which a given finding applies (The effect was mainly observed for teenagers.), the probability that something applies, occurs or is associated (... is possibly associated with …).">3b. In the paper finding, how do you rate the level of certainty the author uses to describe the finding?</span>',
 
             "labels": [
               {
                 "name": "Uncertain",
-                "tooltip": "E.g., 'Sunscreen might prevent skin cancer.'"
+                "tooltip": "E.g., 'Sunscreen might prevent skin cancer.' or 'Overconsumption of sugar may have negative effects on health.', 'Further research is necessary to understand ...'"
               },
               {
                 "name": "Somewhat uncertain",
-                "tooltip": "E.g., 'Sunscreen could prevent skin cancer.'"
+                "tooltip": "E.g., 'Sunscreen could prevent skin cancer.' or 'Overconsumption of sugar can cause diabetes.', 'The functionality possibly depends on ....'"
               },
               {
                 "name": "Can't say",
@@ -261,11 +255,11 @@
               },
               {
                 "name": "Somewhat certain",
-                "tooltip": "E.g., 'Sunscreen can prevent skin cancer.'"
+                "tooltip": "E.g., 'Sunscreen can prevent skin cancer.' or 'The analysis suggests that papers with short titles receive more citations'"
               },
               {
                 "name": "Certain",
-                "tooltip": "E.g., 'Sunscreen prevents skin cancer.'"
+                "tooltip": "E.g., 'Sunscreen prevents skin cancer.' or 'Papers with shorter titles get more citations', '... meaning that this treatment should be used ...'"
               },
             ],
 
@@ -303,7 +297,7 @@
             "labels": [
                 {
                     "name": "Words indicating uncertainty",
-                    "tooltip": "This could be hedges like 'may', 'to some extent', 'probably', 'potentially', 'sometimes'."
+                    "tooltip": "This could be hedges like 'may', 'to some extent', 'probably', 'potentially', 'sometimes', 'possibly', 'mainly'."
                 }
 
             ],
@@ -322,7 +316,7 @@
         "annotation_type": "radio",
         "name": "reporting-is-sensational",
         "label_requirement": {"required":true},
-        "description": "4a. In the reported finding, how sensational is the language?",
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Sensational text intends to spark the interest of a reader, make them curious or elicit an emotional reaction.">4a. In the reported finding, how sensational is the language?</span>',
         #"horizontal": True,
           "labels": [
             {
@@ -350,7 +344,7 @@
         "annotation_type": "radio",
         "name": "paper-is-sensational",
         "label_requirement": { "required": true },
-        "description": "4b. In the paper finding, how sensational is the language?",
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Sensational text intends to spark the interest of a reader, make them curious or elicit an emotional reaction.">4b. In the paper finding, how sensational is the language?</span>',
         #"horizontal": True,
         "labels": [
           {
@@ -397,7 +391,7 @@
       {
         "annotation_type": "radio",
         "name": "how-causal-is-the-reporting",
-        "description": "5a. In the reported finding, what type of causal relationship is described?",
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Causality describes a cause-effect relationship between two things, variables, agents etc. A (directly) causes outcome B. Correlation describes relationships where two actions relate to each other, but one is not necessarily the effect or outcome of the other.">5a. In the reported finding, what type of causal relationship is described?</span>',
         "label_requirement": {"required":true},
 
         # If true, display the labels horizontally
@@ -424,7 +418,7 @@
       {
         "annotation_type": "radio",
         "name": "how-causal-is-the-paper-finding",
-        "description": "5b. In the paper finding, what type of causal relationship is described?",
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Causality describes a cause-effect relationship between two things, variables, agents etc. A (directly) causes outcome B. Correlation describes relationships where two actions relate to each other, but one is not necessarily the effect or outcome of the other.">5b. In the paper finding, what type of causal relationship is described?</span>',
         "label_requirement": {"required":true},
         # If true, display the labels horizontally
         "horizontal": True,
