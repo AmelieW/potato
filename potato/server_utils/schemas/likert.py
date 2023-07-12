@@ -10,7 +10,8 @@ def generate_likert_layout(annotation_scheme):
     # If the user specified the more complicated likert layout, default to the
     # radio layout
     if "labels" in annotation_scheme:
-        return generate_radio_layout(annotation_scheme, horizontal=False)
+        if annotation_scheme["labels"] is not None: # added this
+            return generate_radio_layout(annotation_scheme, horizontal=False)
 
     for required in ["size", "min_label", "max_label"]:
         if required not in annotation_scheme:

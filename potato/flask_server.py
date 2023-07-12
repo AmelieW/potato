@@ -26,7 +26,7 @@ from bs4 import BeautifulSoup
 from create_task_cli import create_task_cli, yes_or_no
 from potato.server_utils.arg_utils import arguments
 from potato.server_utils.config_module import init_config, config, SingleConf
-#from server_utils.schemas import SingleConf
+# from server_utils.schemas import SingleConf
 
 from server_utils.front_end import generate_site, generate_surveyflow_pages
 from server_utils.schemas.span import render_span_annotations
@@ -61,7 +61,6 @@ task_assignment = {}
 # path to save user information
 USER_CONFIG_PATH = "potato/user_config.json"
 DEFAULT_LABELS_PER_INSTANCE = 3
-
 
 # This variable of tyep ActiveLearningState keeps track of information on active
 # learning, such as which instances were sampled according to each strategy
@@ -266,7 +265,7 @@ class UserAnnotationState:
     def go_back(self):
         if self.instance_cursor > 0:
             if self.prestudy_passed is not None and self.is_prestudy_question(
-                self.instance_cursor - 1
+                    self.instance_cursor - 1
             ):
                 return
             self.instance_cursor -= 1
@@ -349,7 +348,7 @@ class UserAnnotationState:
         return self.real_instance_assigned_count
 
     def set_annotation(
-        self, instance_id, schema_to_label_to_value, span_annotations, behavioral_data_dict
+            self, instance_id, schema_to_label_to_value, span_annotations, behavioral_data_dict
     ):
         """
         Based on a user's actions, updates the annotation for this particular instance.
@@ -395,7 +394,7 @@ class UserAnnotationState:
         # self.instance_id_to_behavioral_data[instance_id] = behavioral_data_dict
 
         return (
-            old_annotation != schema_to_label_to_value or old_span_annotations != span_annotations
+                old_annotation != schema_to_label_to_value or old_span_annotations != span_annotations
         )
 
     def update(self, annotation_order, annotated_instances):
@@ -477,7 +476,7 @@ class UserAnnotationState:
         time_dict["minute"] = int(items[4][:-1])
         time_dict["second"] = int(items[5][:-1])
         time_dict["total_seconds"] = (
-            time_dict["second"] + 60 * time_dict["minute"] + 3600 * time_dict["hour"]
+                time_dict["second"] + 60 * time_dict["minute"] + 3600 * time_dict["hour"]
         )
 
         return time_dict
@@ -652,7 +651,7 @@ def load_all_data(config):
             # Otherwise generate a new task assignment dict
             task_assignment = {
                 "assigned": {},
-                "unassigned": OrderedDict(), #use ordered dict so that we can keep track of the original order
+                "unassigned": OrderedDict(),  # use ordered dict so that we can keep track of the original order
                 "testing": {"test_question_per_annotator": 0, "ids": []},
                 "prestudy_ids": [],
                 "prestudy_passed_users": [],
@@ -784,7 +783,8 @@ def cal_agreement(user_list, schema_name, schema_type=None, selected_keys=None):
                     l[j][i] = convert_labels(
                         user_annotation_list[j][_selected_key][schema_name], schema_type
                     )
-        alpha = simpledorff.calculate_krippendorffs_alpha(pd.DataFrame(np.array(l)),metric_fn=distance_metric_dict[schema_type])
+        alpha = simpledorff.calculate_krippendorffs_alpha(pd.DataFrame(np.array(l)),
+                                                          metric_fn=distance_metric_dict[schema_type])
 
         return alpha
 
@@ -810,7 +810,7 @@ def cal_agreement(user_list, schema_name, schema_type=None, selected_keys=None):
         for i, _selected_key in enumerate(selected_keys):
             for j in range(len(user_annotation_list)):
                 if (_selected_key in user_annotation_list[j]) and (
-                    schema_name in user_annotation_list[j][_selected_key]
+                        schema_name in user_annotation_list[j][_selected_key]
                 ):
                     annotations = convert_labels(
                         user_annotation_list[j][_selected_key][schema_name], schema_type
@@ -822,7 +822,8 @@ def cal_agreement(user_list, schema_name, schema_type=None, selected_keys=None):
 
         alpha_dict = {}
         for key in labels:
-            alpha_dict[key] = simpledorff.calculate_krippendorffs_alpha(pd.DataFrame(np.array(l_dict[key])),metric_fn=nominal_metric)
+            alpha_dict[key] = simpledorff.calculate_krippendorffs_alpha(pd.DataFrame(np.array(l_dict[key])),
+                                                                        metric_fn=nominal_metric)
         return alpha_dict
 
 
@@ -904,7 +905,7 @@ def update_annotation_state(username, form):
         if key[:9] == "behavior_":
             behavioral_data_dict[key[9:]] = form[key]
             continue
-        
+
         # Look for the marker that indicates an annotation label.
         #
         # NOTE: The span annotation uses radio buttons as well to figure out
@@ -916,7 +917,7 @@ def update_annotation_state(username, form):
             annotation_schema = cols[0]
             annotation_label = cols[1]
             annotation_value = form[key]
-            
+
             # skip the input when it is an empty string (from a text-box)
             if annotation_value == "":
                 continue
@@ -1056,9 +1057,9 @@ def login():
 
     if action == "login":
         if (
-            config["__debug__"]
-            or ("login" in config and config["login"]["type"] == "url_direct")
-            or user_config.is_valid_password(username, password)
+                config["__debug__"]
+                or ("login" in config and config["login"]["type"] == "url_direct")
+                or user_config.is_valid_password(username, password)
         ):
             # if surveyflow is setup, jump to the page before annotation
             print("%s login successful" % username)
@@ -1234,13 +1235,14 @@ def sample_instances(username):
     global instance_id_to_data
 
     # check if sampling strategy is specified in configuration, if not, set it as random
-    if "sampling_strategy" not in config["automatic_assignment"] or config["automatic_assignment"]["sampling_strategy"] not in ['random','ordered']:
+    if "sampling_strategy" not in config["automatic_assignment"] or config["automatic_assignment"][
+        "sampling_strategy"] not in ['random', 'ordered']:
         logger.debug("Undefined sampling strategy, default to random assignment")
         config["automatic_assignment"]["sampling_strategy"] = "random"
 
     # Force the sampling strategy to be random at this moment, will change this
     # when more sampling strategies are created
-    #config["automatic_assignment"]["sampling_strategy"] = "random"
+    # config["automatic_assignment"]["sampling_strategy"] = "random"
 
     if config["automatic_assignment"]["sampling_strategy"] == "random":
         # previously we were doing random sample directly, however, when there
@@ -1262,8 +1264,8 @@ def sample_instances(username):
             it[0] for it in sorted(unassigned_dict.items(), key=lambda item: item[1], reverse=True)
         ]
         sampled_keys = sorted_keys[
-            : min(config["automatic_assignment"]["instance_per_annotator"], len(sorted_keys))
-        ]
+                       : min(config["automatic_assignment"]["instance_per_annotator"], len(sorted_keys))
+                       ]
 
     elif config["automatic_assignment"]["sampling_strategy"] == "ordered":
         # sampling instances based on the natural order of the data
@@ -1271,8 +1273,8 @@ def sample_instances(username):
         sorted_keys = list(task_assignment["unassigned"].keys())
         sampled_keys = sorted_keys[
                        : min(config["automatic_assignment"]["instance_per_annotator"], len(sorted_keys))
-        ]
-        #print(sampled_keys)
+                       ]
+        # print(sampled_keys)
 
     # update task_assignment to keep track of task assignment status globally
     for key in sampled_keys:
@@ -1328,10 +1330,10 @@ def assign_instances_to_user(username):
             return False
 
         if (
-            "surveyflow" not in config
-            or not config["surveyflow"]["on"]
-            or "prestudy" not in config
-            or not config["prestudy"]["on"]
+                "surveyflow" not in config
+                or not config["surveyflow"]["on"]
+                or "prestudy" not in config
+                or not config["prestudy"]["on"]
         ) or consent_status:
             sampled_keys = sample_instances(username)
             user_state.real_instance_assigned_count += len(sampled_keys)
@@ -1378,7 +1380,7 @@ def assign_instances_to_user(username):
 
     # save task assignment status
     task_assignment_path = (
-        config["output_annotation_dir"] + config["automatic_assignment"]["output_filename"]
+            config["output_annotation_dir"] + config["automatic_assignment"]["output_filename"]
     )
     with open(task_assignment_path, "w") as w:
         json.dump(task_assignment, w)
@@ -1397,14 +1399,15 @@ def generate_full_user_dataflow(username):
     global user_to_annotation_state
     global instance_id_to_data
 
-    #check if sampling strategy is specified in configuration, if not, set it as random
-    if "sampling_strategy" not in config["automatic_assignment"] or config["automatic_assignment"]["sampling_strategy"] not in ['random','ordered']:
+    # check if sampling strategy is specified in configuration, if not, set it as random
+    if "sampling_strategy" not in config["automatic_assignment"] or config["automatic_assignment"][
+        "sampling_strategy"] not in ['random', 'ordered']:
         logger.debug("Undefined sampling strategy, default to random assignment")
         config["automatic_assignment"]["sampling_strategy"] = "random"
 
     # Force the sampling strategy to be random at this moment, will change this
     # when more sampling strategies are created
-    #config["automatic_assignment"]["sampling_strategy"] = "random"
+    # config["automatic_assignment"]["sampling_strategy"] = "random"
 
     if config["automatic_assignment"]["sampling_strategy"] == "random":
         sampled_keys = random.sample(
@@ -1477,7 +1480,8 @@ def generate_full_user_dataflow(username):
 def instances_all_assigned():
     global task_assignment
 
-    if 'unassigned' in task_assignment and len(task_assignment['unassigned']) <= int(config["automatic_assignment"]["instance_per_annotator"] * 0.7):
+    if 'unassigned' in task_assignment and len(task_assignment['unassigned']) <= int(
+            config["automatic_assignment"]["instance_per_annotator"] * 0.7):
         return True
     return False
 
@@ -1577,7 +1581,6 @@ def save_all_annotations():
         with open(annotated_instances_fname, "wt") as outf:
             for user_state in user_to_annotation_state.values():
                 for inst_id, data in user_state.get_all_annotations().items():
-
                     bd_dict = user_state.instance_id_to_behavioral_data.get(inst_id, {})
 
                     output = {
@@ -1692,8 +1695,8 @@ def load_user_state(username):
                     if instance_id not in assigned_user_data:
                         logger.warning(
                             (
-                                "Annotation state for %s does not match "
-                                + "instances in existing dataset at %s"
+                                    "Annotation state for %s does not match "
+                                    + "instances in existing dataset at %s"
                             )
                             % (user_dir, ",".join(config["data_files"]))
                         )
@@ -1711,8 +1714,8 @@ def load_user_state(username):
                     if instance_id not in assigned_user_data:
                         logger.warning(
                             (
-                                "Annotation state for %s does not match "
-                                + "instances in existing dataset at %s"
+                                    "Annotation state for %s does not match "
+                                    + "instances in existing dataset at %s"
                             )
                             % (user_dir, ",".join(config["data_files"]))
                         )
@@ -1863,8 +1866,8 @@ def annotate_page(username=None, action=None):
             # training. However, such advanced wizardry is beyond this MVP and
             # will have to wait
             if (
-                "active_learning_config" in config
-                and config["active_learning_config"]["enable_active_learning"]
+                    "active_learning_config" in config
+                    and config["active_learning_config"]["enable_active_learning"]
             ):
 
                 # Check to see if we've hit the threshold for the number of
@@ -2039,7 +2042,7 @@ def annotate_page(username=None, action=None):
                         continue
                     else:
                         input_field["checked"] = True
-                
+
                     # Set the input value for textarea input
                     if input_field.name == "textarea":
                         input_field.string = value
@@ -2072,11 +2075,11 @@ def parse_html_span_annotation(html_span_annotation):
     and extracts out the precise spans and labels annotated by users.
 
     :returns: a tuple of (1) the annotated string without annotation HTML
-              and a list of annotations    
+              and a list of annotations
     """
     s = html_span_annotation.strip()
-    #print(f"s: {s}")
-    #init_tag_regex = re.compile(r"(<span.+?>)")
+    # print(f"s: {s}")
+    # init_tag_regex = re.compile(r"(<span.+?>)")
     init_tag_regex = re.compile(r"(<span class.+?>)")
     end_tag_regex = re.compile(r"(</span>)")
     anno_regex = re.compile(r'<div class="span_label".+?>(.+)</div>')
@@ -2089,22 +2092,22 @@ def parse_html_span_annotation(html_span_annotation):
         m = init_tag_regex.search(s, start)
         if not m:
             break
-        #print(f"m: {m}")
+        # print(f"m: {m}")
         # find the end tag
         m2 = end_tag_regex.search(s, m.end())
-        #print(f"m2: {m2}")
+        # print(f"m2: {m2}")
 
-        middle = s[m.end() : m2.start()]
-        #print(f"middle: {middle}")
+        middle = s[m.end(): m2.start()]
+        # print(f"middle: {middle}")
 
         # Get the annotation label from the middle text
         m3 = anno_regex.search(middle)
-        #print(f"m3: {m3}")
+        # print(f"m3: {m3}")
 
         middle_text = middle[: m3.start()]
         annotation = m3.group(1)
 
-        no_html_s += s[start : m.start()]
+        no_html_s += s[start: m.start()]
 
         ann = {
             "start": len(no_html_s),
@@ -2184,17 +2187,17 @@ def post_process(config, text):
                 matched_word = match.group()
 
                 first_half = matched_word[: int(len(matched_word) / 2)]
-                last_half = matched_word[int(len(matched_word) / 2) :]
+                last_half = matched_word[int(len(matched_word) / 2):]
 
                 pre = '<span style="background-color: %s;">'
 
                 replacement = (
-                    (pre % colors[0])
-                    + first_half
-                    + "</span>"
-                    + (pre % colors[1])
-                    + last_half
-                    + "</span>"
+                        (pre % colors[0])
+                        + first_half
+                        + "</span>"
+                        + (pre % colors[1])
+                        + last_half
+                        + "</span>"
                 )
 
                 text = text[:start] + replacement + text[end:]
@@ -2367,9 +2370,9 @@ def actively_learn():
         if len(label_counts) < 2:
             logger.warning(
                 (
-                    "In the current data, data labeled with %s has only a"
-                    + "single unique label, which is insufficient for "
-                    + "active learning; skipping..."
+                        "In the current data, data labeled with %s has only a"
+                        + "single unique label, which is insufficient for "
+                        + "active learning; skipping..."
                 )
                 % scheme
             )
@@ -2393,7 +2396,7 @@ def actively_learn():
     perc_random = al_config["random_sample_percent"] / 100
 
     # Split to keep some of the data random
-    random_ids = unlabeled_ids[int(len(unlabeled_ids) * perc_random) :]
+    random_ids = unlabeled_ids[int(len(unlabeled_ids) * perc_random):]
     unlabeled_ids = unlabeled_ids[: int(len(unlabeled_ids) * perc_random)]
     remaining_ids = []
 
@@ -2482,10 +2485,9 @@ def run_server():
 
     args = arguments()
     init_config(args)
-    #print(id(SingleConf))
-    #a = SingleConf()
-    #print(a.__dict__)
-
+    # print(id(SingleConf))
+    # a = SingleConf()
+    # print(a.__dict__)
 
     if config.get("verbose"):
         logger.setLevel(logging.DEBUG)
@@ -2522,13 +2524,11 @@ def run_server():
     # Loads the training data
     load_all_data(config)
 
-
-
     # load users with annotations to user_to_annotation_state
     users_with_annotations = [
         f
         for f in os.listdir(config["output_annotation_dir"])
-        if os.path.isdir(os.path.join(config["output_annotation_dir"],f)) and f != 'archived_users'
+        if os.path.isdir(os.path.join(config["output_annotation_dir"], f)) and f != 'archived_users'
     ]
     for user in users_with_annotations:
         load_user_state(user)

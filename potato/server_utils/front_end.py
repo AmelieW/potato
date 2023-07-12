@@ -407,6 +407,7 @@ def generate_surveyflow_pages(config):
         if _file.split(".")[-1] == "jsonl":
             with open(_file, "r") as r:
                 for line in r:
+                    print(f"file: {_file}")
                     line = json.loads(line.strip())
                     line["filename"] = _file
                     line["pagename"] = _file.split(".")[0].split("/")[-1]
@@ -422,7 +423,6 @@ def generate_surveyflow_pages(config):
     # Potato admin can specify a custom HTML layout that allows variable-named
     # placement of task elements
     if config.get("custom_layout"):
-
         for annotation_scheme in annotation_schemes:
             schema_layout, keybindings = generate_schematic(annotation_scheme)
             all_keybindings.extend(keybindings)
@@ -464,6 +464,12 @@ def generate_surveyflow_pages(config):
                     "label_requirement": line.get("label_requirement"),
                     "sequential_key_binding": False,
                 }
+                # adding this because using likert schema in the surveyflow breaks: it's because the values for min and
+                # max label as well as the size parameter for the likert scale get lost.
+                if line["schema"] == "likert":
+                    annotation_scheme['min_label'] = line.get("min_label")
+                    annotation_scheme['max_label'] = line.get("max_label")
+                    annotation_scheme['size'] = line.get("size")
                 schema_layout, keybindings = generate_schematic(annotation_scheme)
                 schema_layouts += schema_layout + "<br>" + "\n"
 
