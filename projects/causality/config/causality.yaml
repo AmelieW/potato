@@ -20,7 +20,7 @@
 
     # If annotators are using a codebook, this will be linked at the top to the
     # instance for easy access
-    "annotation_codebook_url": "https://docs.google.com/document/d/1CUKSLpmGGH_eGlaFypyD1UKZ1chKvkNIi0FOGEddWcU/edit#bookmark=kix.1dvejtjjjj4z",
+    "annotation_codebook_url": "https://docs.google.com/document/d/15b1MZH24ZkSrXxhWTcRd4kbuK-ufRtZuU39tKiJ1I2Y/edit?usp=sharing",
 
     "data_files": [
       "projects/causality/data/pilot/medicine/score_[4, 5]_batch_3_separated.tsv",
