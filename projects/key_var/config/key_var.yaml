@@ -3,7 +3,7 @@
 
     "server_name": "potato annotator",
 
-    "annotation_task_name": "key variables",
+    "annotation_task_name": "Key Variables",
 
     # Potato will write the annotation file for all annotations to this
     # directory, as well as per-annotator output files and state information
@@ -24,7 +24,7 @@
 
     "data_files": [
       "projects/key_var/data/pilot/medicine/score_[4, 5]_batch_3_fixed_context.tsv",
-      #"projects/key_var/data/pilot/medicine/score_[4, 5]_batch_3_backup_instances_fixed_context.tsv",
+      "projects/key_var/data/pilot/medicine/score_[4, 5]_batch_3_backup_instances_fixed_context.tsv",
     ],
 
     "item_properties": {
@@ -55,7 +55,7 @@
 
       ],
       "testing": [
-             "projects/key_var/surveyflow/attention-generalization.jsonl",
+             "projects/key_var/surveyflow/attention-key_ent.jsonl",
 
       ]
     },
@@ -81,7 +81,7 @@
       "sampling_strategy": "ordered", #"random" is the alternative
       "labels_per_instance": 10,
       "instance_per_annotator": 6,
-      "test_question_per_annotator": 1,
+      "test_question_per_annotator": 2,
       "users": [ ]
     },
 

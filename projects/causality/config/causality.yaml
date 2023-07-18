@@ -3,7 +3,7 @@
 
     "server_name": "potato annotator",
 
-    "annotation_task_name": "causality",
+    "annotation_task_name": "Causality",
 
     # Potato will write the annotation file for all annotations to this
     # directory, as well as per-annotator output files and state information
@@ -24,7 +24,7 @@
 
     "data_files": [
       "projects/causality/data/pilot/medicine/score_[4, 5]_batch_3_separated.tsv",
-      #"projects/causality/data/pilot/medicine/score_[4, 5]_batch_3_backup_instances_fixed_context.tsv",
+      "projects/causality/data/pilot/medicine/score_[4, 5]_batch_3_backup_instances_separated.tsv",
     ],
 
     "item_properties": {
@@ -80,8 +80,8 @@
       "output_filename": "task_assignment.json",
       "sampling_strategy": "ordered", #"random" is the alternative
       "labels_per_instance": 10,
-      "instance_per_annotator": 5,
-      "test_question_per_annotator": 1,
+      "instance_per_annotator": 6,
+      "test_question_per_annotator": 2,
       "users": [ ]
     },
 
