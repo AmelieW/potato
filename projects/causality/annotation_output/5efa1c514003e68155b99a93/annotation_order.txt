@@ -1,0 +1,22 @@
+Welcome.html
+Task.html
+Causality.html
+Causality Examples.html
+Navigation.html
+Consent.html
+Medicine_tweet_142_r
+test_question_testing_No mention of a relation
+Medicine_tweet_142_p
+Medicine_tweet_5_r
+Medicine_tweet_5_p
+Medicine_422_r
+Medicine_422_p
+Medicine_30_r
+Medicine_30_p
+test_question_testing_Causation
+Medicine_tweet_111_r
+Medicine_tweet_111_p
+Medicine_420_r
+Medicine_420_p
+Experience.html
+End.html
