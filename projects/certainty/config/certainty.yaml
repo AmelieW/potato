@@ -23,8 +23,9 @@
     "annotation_codebook_url": "https://docs.google.com/document/d/1bNoa1V_pMVqjQfp0vC1gUVQ9N6b1L_a25wKt8enQgn8/edit?usp=sharing",
 
     "data_files": [
-      "projects/certainty/data/pilot/medicine/score_[4, 5]_batch_3_separated.tsv",
-      "projects/certainty/data/pilot/medicine/score_[4, 5]_batch_3_backup_instances_separated.tsv",
+                    "data/all-data-to-be-annotated/Medicine/separated/Medicine.tsv"
+      #"projects/certainty/data/pilot/medicine/score_[4, 5]_batch_3_separated.tsv",
+      #"projects/certainty/data/pilot/medicine/score_[4, 5]_batch_3_backup_instances_separated.tsv",
     ],
 
     "item_properties": {
@@ -79,8 +80,8 @@
       "on": true,
       "output_filename": "task_assignment.json",
       "sampling_strategy": "ordered", #"random" is the alternative
-      "labels_per_instance": 10,
-      "instance_per_annotator": 6,
+      "labels_per_instance": 3,
+      "instance_per_annotator": 12,
       "test_question_per_annotator": 2,
       "users": [ ]
     },
