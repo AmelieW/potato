@@ -1,0 +1,22 @@
+Welcome.html
+Task.html
+Causality.html
+Causality Examples.html
+Navigation.html
+Consent.html
+Medicine_tweet_298_r
+test_question_testing_Causation
+Medicine_tweet_298_p
+Medicine_3_r
+test_question_testing_Explicitly states: no relation
+Medicine_3_p
+Medicine_268_r
+Medicine_268_p
+Medicine_104_r
+Medicine_104_p
+Medicine_tweet_1_r
+Medicine_tweet_1_p
+Medicine_401_r
+Medicine_401_p
+Experience.html
+End.html
