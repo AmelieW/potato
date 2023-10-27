@@ -1,0 +1,4 @@
+{"id":"1","text":"How satisfied do you feel about your experience participating in our study?","schema": "likert", "size":5, "min_label": "Not satisfied at all", "max_label": "Very satisfied", "label_requirement": {"required":true}}
+{"id":"2","text":"Compared to other studies you've participated in, how do you rate the difficulty of this task?","schema": "likert","size":5, "min_label": "Much more difficult than others", "max_label": "Much easier than others", "label_requirement": {"required":true}}
+{"id":"3","text":"How confident are you that you performed well in the task?","schema": "likert", "min_label": "Very confident", "max_label": "Very unconfident","size":5, "label_requirement": {"required":true}}
+{"id":"4","text":"Please feel free to leave any comments about our study (optional)","schema": "text"}
