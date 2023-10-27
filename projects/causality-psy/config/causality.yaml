@@ -23,7 +23,7 @@
     "annotation_codebook_url": "https://docs.google.com/document/d/15b1MZH24ZkSrXxhWTcRd4kbuK-ufRtZuU39tKiJ1I2Y/edit?usp=sharing",
 
     "data_files": [
-      "/data/all-data-to-be-annotated/Psychology/separated/Psychology.tsv",
+      "data/all-data-to-be-annotated/Psychology/separated/Psychology.tsv",
     ],
 
     "item_properties": {
