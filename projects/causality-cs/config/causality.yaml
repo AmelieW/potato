@@ -1,0 +1,204 @@
+{
+    "port": 9001,
+
+    "server_name": "potato annotator",
+
+    "annotation_task_name": "Causality-cs",
+
+    # Potato will write the annotation file for all annotations to this
+    # directory, as well as per-annotator output files and state information
+    # necessary to restart annotation.
+    "output_annotation_dir": "projects/causality-cs/annotation_output/",
+
+    # The output format for the all-annotator data. Allowed formats are:
+    # * jsonl
+    # * json (same output as jsonl)
+    # * csv
+    # * tsv
+    #
+    "output_annotation_format": "tsv",
+
+    # If annotators are using a codebook, this will be linked at the top to the
+    # instance for easy access
+    "annotation_codebook_url": "https://docs.google.com/document/d/15b1MZH24ZkSrXxhWTcRd4kbuK-ufRtZuU39tKiJ1I2Y/edit?usp=sharing",
+
+    "data_files": [
+      "data/all-data-to-be-annotated/Computer_Science/separated/Computer_Science.tsv",
+    ],
+
+    "item_properties": {
+        "id_key": "id",
+        "text_key": "text"
+    },
+
+
+
+    "surveyflow": {
+      "on": true,
+      "order": [
+        "pre_annotation",
+        "post_annotation"
+      ],
+      "pre_annotation": [
+        "projects/causality-cs/surveyflow/Welcome.jsonl",
+        "projects/causality-cs/surveyflow/Task.jsonl",
+        "projects/causality-cs/surveyflow/Causality.jsonl",
+        "projects/causality-cs/surveyflow/Causality Examples.jsonl",
+        "projects/causality-cs/surveyflow/Navigation.jsonl",
+        "projects/causality-cs/surveyflow/Consent.jsonl",
+      ],
+      "post_annotation": [
+          "projects/causality-cs/surveyflow/Experience.jsonl",
+          "projects/causality-cs/surveyflow/End.jsonl",
+
+
+      ],
+      "testing": [
+             "projects/causality-cs/surveyflow/attention-causality.jsonl",
+
+      ]
+    },
+
+
+
+    "user_config": {
+
+      "allow_all_users": True,
+      
+      "users": [  ],
+    },
+
+    #list_as_text is used when the input text is actually a list of texts, usually used for best-worst-scaling or dialogue analysis
+    "list_as_text": {
+      "text_list_prefix_type": 'none', #whether automatically insert a prefix for each line, currently supporting 'number', 'alphabet', 'number'
+      "horizontal": True,
+    },
+
+    "automatic_assignment": {
+      "on": true,
+      "output_filename": "task_assignment.json",
+      "sampling_strategy": "ordered", #"random" is the alternative
+      "labels_per_instance": 3,
+      "instance_per_annotator": 12,
+      "test_question_per_annotator": 2,
+      "users": [ ]
+    },
+
+    # How many seconds do you want the annotators spend on each instance, after
+    # that, an alert will be sent per alert_time_each_instance seconds.
+    "alert_time_each_instance": 10000000,
+
+    "annotation_schemes": [
+
+      # Changes in Causality
+
+      {
+        "annotation_type": "radio",
+        "name": "how-causal-is-the-finding",
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Causality describes a cause-effect relationship between two things, variables, agents etc. A (directly) causes outcome B. Correlation describes relationships where two actions relate to each other, but one is not necessarily the effect or outcome of the other.">In the finding, what type of causal relationship is described?</span>',
+        "label_requirement": {"required":true},
+        # If true, display the labels horizontally
+        "horizontal": True,
+
+        "labels": [
+          {
+            "name": "No mention of a relation",
+            "tooltip": "No mention of a relation of any kind. E.g., if the finding is a summary such as 'We find evidence of biases across all languages'."
+          },
+          {
+            "name": "Correlation",
+            "tooltip": "The paper finding describes a correlation between two elements. E.g., 'Vitamin D levels are associated with extensive tiredness'"
+          },
+          {
+            "name": "Causation",
+            "tooltip": "The paper finding describes a causal relation between two elements. E.g., 'Low vitamin D levels cause extensive tiredness' or 'Tiredness might be caused by lack of vitamin D.'"
+          },
+          {
+            "name": "Explicitly states: no relation",
+            "tooltip": "The finding explicitly states that there is no relation between the two elements. E.g., 'We find no evidence that vitamin D levels are associated with tiredness.'"
+          }
+        ],
+        "sequential_key_binding": True,
+      },
+        {
+            "annotation_type": "highlight",
+            "name": "causality-spans",
+            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">Click on the checkbox and mark the words and phrases in the finding that express the relation.</span>',
+            "labels": [
+              {
+                "name": "Causation",
+                "tooltip": "X causes Y. E.g., 'cause(s)', 'direct connection', 'result in', 'lead to', 'trigger', 'produce', 'increase', 'decrease'"
+              },
+              {
+                "name": "Correlation",
+                "tooltip": "X is associated with Y. E.g., 'a link between', 'associated with', 'association', 'connection', 'correlated with', 'linked to'"
+              },
+              {
+                "name": "Explicit mentions of no relation",
+                "tooltip": "X and Y are not related. E.g., 'no link', 'not associated', 'isn't caused by', 'no evidence for a connection', 'no relation between', 'no correlation between', 'no connection between'"
+              },
+
+
+            ],
+
+          # If true, numbers [1-len(labels)] will be bound to each
+          # label. Highlight selection annotations with more than 10 are not supported
+          # with this simple keybinding and will need to use the full item
+          # specification to bind all labels to keys.
+            "sequential_key_binding": True,
+        },
+
+
+
+        ],
+
+
+
+
+
+
+
+
+    # The html that changes the visualiztation for your task. Change this file
+    # to influence the layout and description of your task. This is not a full
+    # HTML page, just the piece that does lays out your task's pieces
+    "html_layout": "templates/examples/plain_layout.html",
+
+    # The core UI files for Potato. You should not need to change these normally.
+    #
+    # Exceptions to this might include:
+    # 1) You want to add custom CSS/fonts to style your task
+    # 2) Your layout requires additional JS/assets to render
+    # 3) You want to support additional keybinding magic
+    #
+    "base_html_template": "templates/base_template.html",
+    "header_file": "templates/header.html",
+
+    # This is where the actual HTML files will be generated
+    "site_dir": "potato/templates/",
+
+  #defining the ways annotators entering the annotation system
+    "login": {
+        "type": 'url_direct',    #can be 'password' or 'url_direct'
+        "url_argument": 'PROLIFIC_PID' # when the login type is set to 'url_direct', 'url_argument' must be setup for a direct url argument login
+    },
+
+    "ui": {
+      "spans": {
+        "span_colors":
+          {
+            "Added element in reported finding.": "(204,121,167)",
+            "Missing element from the reported finding.": "(0, 114,178)",
+            "Generalization": "(213,94,0)",
+            "Words indicating certainty": "(240,228,66)",
+            "Words indicating uncertainty": "(0,158,115)",
+            "Sensational language": "(86,180,233)",
+            "Causation": "(230,159,0)",
+            "Correlation": "(78,76,74)",
+            "Explicit mentions of no relation": "(172,238,180)",
+          }
+      }
+    }
+
+
+}
