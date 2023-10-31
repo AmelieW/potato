@@ -23,8 +23,8 @@
     "annotation_codebook_url": "https://docs.google.com/document/d/15b1MZH24ZkSrXxhWTcRd4kbuK-ufRtZuU39tKiJ1I2Y/edit?usp=sharing",
 
     "data_files": [
-      "data/all-data-to-be-annotated/Medicine/separated/Medicine_one_missing.tsv",
-      "data/all-data-to-be-annotated/Medicine/separated/Medicine.tsv"
+      "data/all-data-to-be-annotated/Medicine/separated/Medicine_missing.tsv",
+      #"data/all-data-to-be-annotated/Medicine/separated/Medicine.tsv"
       #"projects/causality/data/pilot/medicine/score_[4, 5]_batch_3_separated.tsv",
       #"projects/causality/data/pilot/medicine/score_[4, 5]_batch_3_backup_instances_separated.tsv",
     ],
@@ -81,8 +81,8 @@
       "on": true,
       "output_filename": "task_assignment.json",
       "sampling_strategy": "ordered", #"random" is the alternative
-      "labels_per_instance": 2,
-      "instance_per_annotator": 12,
+      "labels_per_instance": 1,
+      "instance_per_annotator": 9,
       "test_question_per_annotator": 2,
       "users": [ ]
     },
