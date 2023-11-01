@@ -3,7 +3,7 @@
 
     "server_name": "potato annotator",
 
-    "annotation_task_name": "Certainty",
+    "annotation_task_name": "Certainty-med",
 
     # Potato will write the annotation file for all annotations to this
     # directory, as well as per-annotator output files and state information
