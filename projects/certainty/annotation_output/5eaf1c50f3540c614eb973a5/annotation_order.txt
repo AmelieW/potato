@@ -1,0 +1,22 @@
+Welcome.html
+Task.html
+Certainty.html
+Certainty Examples.html
+Navigation.html
+Consent.html
+Medicine_tweet_105_r
+Medicine_tweet_105_p
+Medicine_tweet_42_r
+test_question_testing_Somewhat certain
+Medicine_tweet_42_p
+Medicine_35_r
+Medicine_35_p
+Medicine_11_r
+Medicine_11_p
+Medicine_tweet_145_r
+Medicine_tweet_145_p
+Medicine_tweet_6_r
+test_question_testing_Somewhat uncertain
+Medicine_tweet_6_p
+Experience.html
+End.html
