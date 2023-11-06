@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!--- HEADER GOES BELOW HERE--->
+
+  
+    <head>
+      <!-- <script src="jquery-3.3.1.min.js"></script> -->
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            .row {
+                display: flex;
+                flex-direction: column;
+            }
+
+
+            /*                 border:1px solid black;
+                border-radius: 5px; */
+
+            
+            /* Create two equal columns that sits next to each other */
+            .column {
+                flex: 50%;
+                padding: 15px;
+            }
+            
+            .instance {
+                border:1px solid #070707;
+                background-color: cccccc;
+                border-radius: 5px;
+                padding: 15px;
+                display: block;
+                justify-content: center;
+                width: fit-content;
+                max-width: 80%;
+                text-align: left;
+                margin: 0 auto;
+                font-size: 15pt;
+            }
+
+            .instance p {
+                font-weight: bold;
+                display: block;
+            }
+
+            
+            .annotation_schema {
+                padding: 5px;                
+                display: flex;
+                justify-content: center;
+                width: 80%;
+                text-align: left;
+                margin: 0 auto;
+            }
+           
+            
+            fieldset {
+                background-color: #ededed;
+                border:1px solid #160085;
+                background-color: cccccc;
+                padding: 10px 15px 10px 15px;
+            }
+            
+            legend {
+                background-color: #160085;
+                color: white;
+                padding: 5px 5px;
+                font-size: 13pt;
+                font-weight: bold;
+            }
+
+            input[type="text"] {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;  
+                box-sizing: border-box;
+                width: 100%;
+            }
+              
+            input {
+                margin: 5px;
+            }
+
+
+            .likert li {
+                float: left;
+                list-style-type: none;
+            }
+
+
+            /* The sidepanel menu */
+            .sidepanel {
+                min-height: 250px; /* Specify a height */
+                width: 0; /* 0 width - change this with JavaScript */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Stay on top */
+                top: 95px;
+                left: 1px;
+                background-color: #111; /* Black*/
+                overflow-x: hidden; /* Disable horizontal scroll */
+                padding-top: 10px; /* Place content 60px from the top */
+                padding-bottom: 20px;
+                transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+            }
+
+            /* The sidepanel links */
+            .sidepanel a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 55px;
+                color: #ffffff; /* #818181; */
+                display: block;
+                transition: 0.3s;
+            }
+
+            /* When you mouse over the navigation links, change their color */
+            .sidepanel a:hover {
+                color: #f1f1f1;
+            }
+
+            /* When you mouse over the navigation links, change their color */
+            .sidepanel table {
+                color: #ffffff;
+                font-size: 20px;
+                /*padding: 8px 8px 18px 62px;*/
+                margin-left: 20px;
+                margin-top: 10px;
+                border-spacing: 10px;
+            }
+            
+            .sidepanel td, th  {
+                color: #ffffff;
+                padding: 5px;
+            }
+
+            .sidepanel tr:nth-child(even) {
+                background-color: #333333;
+            }
+                        
+            
+            /* Position and style the close button (top right corner) */
+            .sidepanel .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            /* Style the button that is used to open the sidepanel */
+            .openbtn {
+                cursor: pointer;
+                /*
+                font-size: 20px;                
+                background-color: #111;
+                color: white;
+                padding: 10px 15px;
+                border: none;*/
+            }
+
+            .openbtn:hover {
+                background-color: #444;
+            } 
+
+            /* The instructions */
+            .instructions {
+                /* width: 0; */ /* 0 width - change this with JavaScript */
+                transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+                overflow-y: hidden; /* Disable horizontal scroll */
+                border:1px solid #070707;
+                background-color: cccccc;
+                border-radius: 5px;
+                padding: 15px;
+                display: block;
+                justify-content: center;
+                width: fit-content;
+                max-width: 80%;
+                text-align: left;
+                margin: 0 auto;
+                font-size: 14pt;               
+            }
+
+            
+            /* Position and style the close button (top right corner) */
+            .instructions .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            /* Style the button that is used to open the sidepanel */
+            .instructions .openbtn {
+                cursor: pointer;
+                /*
+                font-size: 20px;                
+                background-color: #111;
+                color: white;
+                padding: 10px 15px;
+                border: none;*/
+            }
+
+            .span_container {
+              border-width:3px;
+              border-style:solid;
+              border: 2px solid black;
+              position: relative;
+              border-radius: 5px;
+              padding: 2px 5px;
+              background-color: pink;
+            }
+            
+            .span_label {
+            position: absolute;
+            top: -12px;
+            left: 5px;
+            font-size: 7px;
+            padding: 1px 1px;
+            border-radius: 3px;
+            background-color: pink;
+            border: 2px solid red;
+            text-align: center;
+            }            
+            
+        </style>
+    </head>
+
+    
+
+
+  <!--- HEADER GOES ABOVE HERE--->
+  
+  <body>
+
+
+
+    <input type="hidden" name="username" id="username" value="{{username}}">
+    <input type="hidden" name="instance_id" id="instance_id" value="{{instance_id}}">
+    <input type="hidden" name="alert_time_each_instance" id="alert_time_each_instance" value="{{alert_time_each_instance}}">
+    <p id="timecounter" hidden>Time spent:</p>
+
+    <div id="mySidepanel" class="sidepanel">
+      <a href="javascript:void(0)" class="closebtn" target_id="mySidepanel" onclick="closeNav(this.getAttribute('target_id'))">&times;</a>
+      <table><tr><th>Key</th><th>Description</th></tr><tr><td style="text-align: center;">&#8592;</td><td>Move backward</td></tr><tr><td style="text-align: center;">&#8594;</td><td>Move forward</td></tr><tr><td style="text-align: center;">1</td><td>changes-key-entity: yes</td></tr><tr><td style="text-align: center;">2</td><td>changes-key-entity: no</td></tr><tr><td style="text-align: center;">1</td><td>key-elements-added-in-reporting: Added element in reported finding.</td></tr><tr><td style="text-align: center;">1</td><td>key-elements-missing-in-the-reporting: Missing element from the reported finding.</td></tr><tr><td style="text-align: center;">1</td><td>Level-of-generality: yes</td></tr><tr><td style="text-align: center;">2</td><td>Level-of-generality: no</td></tr><tr><td style="text-align: center;">1</td><td>key-elements: Generalization</td></tr><tr><td style="text-align: center;">1</td><td>how-certain-is-the-reported-finding: Uncertain</td></tr><tr><td style="text-align: center;">2</td><td>how-certain-is-the-reported-finding: Somewhat uncertain</td></tr><tr><td style="text-align: center;">3</td><td>how-certain-is-the-reported-finding: Somewhat certain</td></tr><tr><td style="text-align: center;">4</td><td>how-certain-is-the-reported-finding: Certain</td></tr><tr><td style="text-align: center;">1</td><td>how-certain-is-the-paper-finding: Uncertain</td></tr><tr><td style="text-align: center;">2</td><td>how-certain-is-the-paper-finding: Somewhat uncertain</td></tr><tr><td style="text-align: center;">3</td><td>how-certain-is-the-paper-finding: Somewhat certain</td></tr><tr><td style="text-align: center;">4</td><td>how-certain-is-the-paper-finding: Certain</td></tr><tr><td style="text-align: center;">1</td><td>certainty: Words indicating certainty</td></tr><tr><td style="text-align: center;">1</td><td>uncertainty: Words indicating uncertainty</td></tr><tr><td style="text-align: center;">1</td><td>reporting-is-sensational: Neutral</td></tr><tr><td style="text-align: center;">2</td><td>reporting-is-sensational: Mostly neutral, slightly sensational</td></tr><tr><td style="text-align: center;">3</td><td>reporting-is-sensational: Sensational</td></tr><tr><td style="text-align: center;">1</td><td>paper-is-sensational: Neutral</td></tr><tr><td style="text-align: center;">2</td><td>paper-is-sensational: Mostly neutral, slightly sensational</td></tr><tr><td style="text-align: center;">3</td><td>paper-is-sensational: Sensational</td></tr><tr><td style="text-align: center;">1</td><td>sensational-language-cues: Sensational language</td></tr><tr><td style="text-align: center;">1</td><td>how-causal-is-the-reporting: No relation is stated</td></tr><tr><td style="text-align: center;">2</td><td>how-causal-is-the-reporting: Correlation</td></tr><tr><td style="text-align: center;">3</td><td>how-causal-is-the-reporting: Causation</td></tr><tr><td style="text-align: center;">1</td><td>how-causal-is-the-paper-finding: No relation is stated</td></tr><tr><td style="text-align: center;">2</td><td>how-causal-is-the-paper-finding: Correlation</td></tr><tr><td style="text-align: center;">3</td><td>how-causal-is-the-paper-finding: Causation</td></tr><tr><td style="text-align: center;">1</td><td>causality-reporting: Causation</td></tr><tr><td style="text-align: center;">1</td><td>correlation-reporting: Correlation</td></tr></table>
+    </div>
+
+    <div id="Statpanel" class="sidepanel">
+      <a href="javascript:void(0)" class="closebtn" target_id="Statpanel" onclick="closeNav(this.getAttribute('target_id'))">&times;</a>
+      <table><tr><th> </th><th> </th></tr><tr><td style="text-align: center;">Annotated instances</td><td>{{statistics_nav['Annotated instances']}}</td></tr><tr><td style="text-align: center;">Total working time</td><td>{{statistics_nav['Total working time']}}</td></tr><tr><td style="text-align: center;">Average time on each instance</td><td>{{statistics_nav['Average time on each instance']}}</td></tr><tr><td style="text-align: center;">Agreement</td><td>{{statistics_nav['Agreement']}}</td></tr></table>
+    </div>
+    
+    <script>
+      document.addEventListener('keyup', function (event) {
+          var active_id = document.activeElement.id;
+          var active_type = document.activeElement.getAttribute('type');
+          if (active_id == 'go_to' | active_type == 'text') return;
+
+          //first check whether this keyboard input is a shortcut for checkboxes
+          var checkboxes = document.querySelectorAll('input[type=checkbox]');
+          var radios = document.querySelectorAll('input[type=radio]');
+          var x = event.key.toLowerCase();
+
+          for (var i = 0; i < checkboxes.length; i++) {
+              //alert(checkboxes[i].value)
+              if(x === checkboxes[i].value){
+                  checkboxes[i].checked = !checkboxes[i].checked;
+                  if (checkboxes[i].onclick != null) checkboxes[i].onclick.apply(checkboxes[i]);
+                  return;
+              };
+          }
+          for (var i = 0; i < radios.length; i++) {
+              //alert(checkboxes[i].value)
+              if(x === radios[i].value){
+                  radios[i].checked = !radios[i].checked;
+                  if (radios[i].onclick != null) radios[i].onclick.apply(radios[i]);
+                  return;
+              };
+          }
+
+          // Each time we process a user's key presses, track who is doing
+          // it by grabbing the hidden firstname and lastname fields
+          get_new_instance(event);          
+      });
+
+      function getSelectedText() {
+          var text = "";
+          if (typeof window.getSelection != "undefined") {
+              text = window.getSelection().toString();
+          } else if (typeof document.selection != "undefined" && document.selection.type == "Text") {
+              text = document.selection.createRange().text;
+          }
+          return text;
+      }
+
+      function surroundSelection(selectionLabel, selectionColor)  {
+          //var span = document.createElement("span");
+          //span.style.fontWeight = "bold";
+          //span.style.color = "green";
+   
+          if (window.getSelection) {
+              var sel = window.getSelection();
+
+              // Check that we're labeling something in the instance text that
+              // we want to annotate
+              if (sel.anchorNode.parentElement) {
+
+                  if (sel.anchorNode.parentElement.getAttribute("name") != "instance_text") {
+                      
+                      // See if this text was already wrapped with the currently
+                      // selected class label and if so, remove it
+                      var parentOfSelection = sel.anchorNode.parentElement
+
+                      if (parentOfSelection.getAttribute("selection_label") == selectionLabel) {
+                          // Remove the div tag that has the span's annotation label
+                          $( parentOfSelection ).find("div").remove();
+                          // Remove the span tag that has the highlight box
+                          $( parentOfSelection.firstChild ).unwrap();
+                      }
+
+                      return;
+                  }
+              }
+              else {
+                  // alert("no parent element");
+                  return;
+              }
+              
+              // Otherwise, we're going to be adding a new span annotation, if
+              // the user has selected some non-empty part of th text
+              if (sel.rangeCount && sel.toString().trim().length > 0) {                 
+
+                  tsc = selectionColor.replace(")", ", 0.25)")
+                  
+                  var span = document.createElement("span");
+                  span.className = "span_container";
+                  span.setAttribute("selection_label", selectionLabel);
+                  span.setAttribute("style", "background-color:rgb" + tsc + ";");
+                  console.log(selectionColor);
+                  
+                  var label = document.createElement("div");
+                  label.className = "span_label";
+                  label.textContent = selectionLabel;
+                  label.setAttribute("style", "background-color:white;line-height:100%;"
+                                    + "border:2px solid rgb" + selectionColor + ";");
+                  
+                  var range = sel.getRangeAt(0).cloneRange();
+                  range.surroundContents(span);
+                  sel.removeAllRanges();
+                  sel.addRange(range);
+                  span.appendChild(label);
+              }
+          }
+      }
+
+      function changeSpanLabel(checkbox, spanLabel, spanColor) {
+          // Listen for when the user has highlighted some text (only when the label is checked)
+          document.onmouseup = function() {
+              if (checkbox.checked){
+                  surroundSelection(spanLabel, spanColor);
+              }
+          }
+      }
+
+      // Listen for when the user has highlighted some text
+      // document.onmouseup = function() { surroundSelection("Undefined"); } 
+
+    </script>
+    <script>
+      function barValue(range,sibling) {
+          // function used to obtain value for range input
+          sibling.value = range.value;
+          //var x = document.getElementsByClassName(range.className);
+          //var i;
+          //for (i=0: i < x.length; i++) {
+          //    if(x[i].value != range.value) x[i]
+          //}
+      }
+    </script>
+
+    <script>
+      function onlyOne(checkbox) {
+	  // this function is used for the single-choice setting
+	  //alert(checkbox.className)
+	  var x = document.getElementsByClassName(checkbox.className);
+	  var i;
+	  for (i = 0; i < x.length; i++) {
+	      if(x[i].value != checkbox.value) x[i].checked = false;
+	  }
+      }
+    </script>
+
+
+    <script>
+      function whetherNone(checkbox) {
+	  // this function is used to uncheck all the other labels when "None" is checked
+	  //alert(checkbox.className)
+	  var x = document.getElementsByClassName(checkbox.className);
+	  var i;
+	  for (i = 0; i < x.length; i++) {
+              if(checkbox.value == "None" && x[i].value != "None") x[i].checked = false;
+              if(checkbox.value != "None" && x[i].value == "None") x[i].checked = false;
+          }
+
+      }
+    </script>
+
+
+    <script>
+      function click_to_next() {
+          // Gacky code to simulate the submit button as a keyboard event
+          // and not have two separate paths to handle keyboard and mouse
+          // events
+          var e = $.Event('keyup');
+          e.key = "ArrowRight";
+          
+          get_new_instance(e);
+      }
+
+      function click_to_prev() {
+          // Gacky code to simulate the submit button as a keyboard event
+          // and not have two separate paths to handle keyboard and mouse
+          // events
+          var e = $.Event('keyup');
+          e.key = "ArrowLeft";
+          
+          get_new_instance(e);
+      } 
+      
+    </script>
+    
+    {{annotation}}
+    
+    <script>
+      window.onunload = check_close;
+      function check_close() {
+          // console.error("session closed");
+          var post_req = {
+              is_close: "closed"
+          }
+          post(post_req);
+      }
+    </script>
+
+    <script>
+      // Set the date we're counting down to
+      var countDownDate = new Date().getTime();
+
+      // Update the count down every 1 second
+      var x = setInterval(function() {
+
+          // Get today's date and time
+          var now = new Date().getTime();
+
+          // Find the distance between now and the count down date
+          var distance = now - countDownDate;
+
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          var total_seconds = Math.floor(distance / 1000);
+
+          // Output the result in an element with id="timecounter"
+
+          document.getElementById("timecounter").innerHTML = "Time spent: " + days + "d " + hours + "h "
+              + minutes + "m " + seconds + "s ";
+
+          // TODO: add configurations for alert message and maximum time spent on each instance
+          // If the count down is over, write some text
+
+          var alert_time_each_instance = document.getElementById("alert_time_each_instance").value;
+          if (total_seconds % alert_time_each_instance == 0) {
+              //clearInterval(x);
+              //document.getElementById("timecounter").innerHTML = "EXPIRED";
+              alert("You have spent " + total_seconds + " seconds on this instance")
+          }
+
+      }, 1000);
+    </script>
+    
+    <script>
+      // We submit a new post to the same (user/annotate) endpoint
+      function post(params) {
+          
+          // The rest of this code assumes you are not using a library.
+          // It can be made less wordy if you use one.
+          var form = document.createElement("form");
+          form.setAttribute("method", "post");
+          form.setAttribute("action", "annotate");
+          
+          var hiddenField = document.createElement("input");
+          hiddenField.setAttribute("type", "hidden");
+          hiddenField.setAttribute("name", "email");
+          hiddenField.setAttribute("value", document.getElementById('username').value);
+          form.appendChild(hiddenField);
+          
+          for (var key in params) {
+              if (params.hasOwnProperty(key)) {
+                  var hiddenField = document.createElement("input");
+                  hiddenField.setAttribute("type", "hidden");
+                  hiddenField.setAttribute("name", key);
+                  hiddenField.setAttribute("value", params[key]);
+                  
+                  form.appendChild(hiddenField);
+              }
+          }
+
+          // Stuff all the current annotations into attributes for processing on the server side
+          $('form input, form select, form textarea').each(
+              function(index){  
+                  var input = $(this);
+                  
+                  if (input.attr('type') == 'checkbox' || input.attr('type') == 'radio') {
+                      if (input.is(":checked")) {
+                          // Stuff all the input fields into something for the post
+                          var hiddenField = document.createElement("input");
+                          hiddenField.setAttribute("type", "hidden");
+                          hiddenField.setAttribute("name", input.attr('name'));
+                          hiddenField.setAttribute("value", input.attr('value'));
+                          form.appendChild(hiddenField);
+                      }
+                  }
+                  else if (input.attr('type') == 'text' || input.attr('type') == 'number') {
+                      var hiddenField = document.createElement("input");
+                      hiddenField.setAttribute("type", "hidden");
+                      hiddenField.setAttribute("name", input.attr('name'));
+                      hiddenField.setAttribute("value", input[0].value);
+                      form.appendChild(hiddenField);                                        
+                  }
+                  else if (input.attr('type') == 'select-one') {
+                      //alert(input[0].value)
+                      var hiddenField = document.createElement("input");
+                      hiddenField.setAttribute("type", "hidden");
+                      hiddenField.setAttribute("name", input.attr('name'));
+                      hiddenField.setAttribute("value", input[0].value);
+                      form.appendChild(hiddenField);
+                  }
+                  else {
+                      console.log("unknown form type: \"" + input.attr('type') + "\"")
+                  }
+              }
+          );
+
+          // Get all the highlighted text for this instance and marshall that
+          // into some kind of representation for the server side
+          $(".span_container").first().each(
+              function(index) {
+
+                  // We'll use the raw HTML of what has been annotated as the
+                  // set of labels to pass over to the server.
+                  // we save the outerHTML to accomadate user-defined HTML inputs
+                  var annotated_spans = $(this).parent().prop('outerHTML');
+
+                  // Due to the DJ's inability to write decent Javascript, we're
+                  // fully punting on the idea of doing label preprocessing here
+                  // and instead shuttling the entire HTML of the instance to
+                  // the server for python-based processing. The main issue is
+                  // figuring out the precise text offsets of the annotated
+                  // spans while dealing with nested DOM elements.
+                  var hiddenField = document.createElement("input");
+                  hiddenField.setAttribute("type", "hidden");
+                  hiddenField.setAttribute("name", "span-annotation");
+                  hiddenField.setAttribute("value", annotated_spans);
+                  form.appendChild(hiddenField);
+                  //console.log(annotated_spans)
+              }
+          );
+
+          
+          document.body.appendChild(form);
+          form.submit();
+      }
+
+
+       /**
+       * Validate if the input answers meet certain rules
+       * along with any relevant key presses to request a new instance to
+       * annotate.
+       */
+      function validate_answers() {
+
+          // check if all the right labels are checked
+          //alert({{instance_obj|tojson}}['id'])
+          var inputs =  document.querySelectorAll('input[validation=right_label]');
+          for (var i = 0; i < inputs.length; ++i) {
+            if (inputs[i].getAttribute('validation') == 'right_label' && inputs[i].checked == false){
+                alert(inputs[i].name + " must be selected to proceed");
+                //alert(instance_obj.id)
+                return false;
+            }
+          }
+
+
+          // identify all the fieldsets and check if all the required forms are filled
+          var fields = document.getElementsByTagName('fieldset');
+          for (var i = 0; i < fields.length; ++i) {
+                var inputs = fields[i].querySelectorAll('input[validation=required], select[validation=required]');
+                // continue if all there's no required inputs in the current field set
+                if (inputs.length == 0){
+                    continue;
+                }
+                //var required = true;
+                // check if the current form requires inputs
+                //if (inputs[0].getAttribute('validation') == 'required'){
+                //    required= true;
+                //}
+
+
+                checked_flag = false;
+                for (var j = 0; j < inputs.length; ++j) {
+                    // if a right_label is not selected, display an error msg and return false
+                    //if (inputs[j].getAttribute('validation') == 'right_label' && inputs[j].checked == false) {
+                    //    alert(inputs[j].name + " must be selected to proceed");
+                        //alert(instance_obj.id)
+                    //    return false;
+                    //}
+                    // if any of the labels is checked, set checked_flag as true;
+                    if (inputs[j].checked == true) {
+                        checked_flag = true;
+                        break;
+                    }
+                    // if the input_type is number of text, check if it's empty
+                    // todo: the current way might not work well if there are mixed textinput and radio buttons under a sample fieldset
+                    if (inputs[j].type == "text" || inputs[j].type == "number" || inputs[j].type == "select-one") {
+                        if (inputs[j].value.length == 0){
+                            alert(inputs[j].name + " must be completed to proceed");
+                            return false;
+                        }
+                        else{
+                            checked_flag = true;
+                        }
+                    }
+                }
+
+
+                // if this form requires inputs, but nothing is checked, display an error msg and return false
+                if (checked_flag == false){
+                    alert("You must answer the following item to proceed: " + inputs[0].className);
+                    return false;
+                }
+                //alert(instance_obj.id)
+          }
+          return true;
+      }
+
+
+      /**
+       * Sends the current state of the instance's annotation to the server,
+       * along with any relevant key presses to request a new instance to
+       * annotate.
+       */
+      function get_new_instance(event) {
+          var x = event.key;
+          var action = ""
+          var ism = ""
+
+          //console.log(x)
+          //console.log(firstname)
+          //console.log(lastname)
+          if (x == "ArrowLeft") { // Spacebar
+              action = "prev_instance";
+          }
+          else if (x == "ArrowRight") {
+              if (validate_answers() == true) {
+                  action = "next_instance";
+              }
+              else{
+                  return;
+              }
+          }
+          else {
+              // console.log("Unknown key press", event)
+              return
+          }
+          
+          var instance_id = document.getElementById('instance_id').value
+          var time_string = document.getElementById("timecounter").innerHTML //get time spent on this instance
+          //time_string = '-1'
+          var post_req = {
+              label: ism,
+              src: action,
+              instance_id: instance_id,
+              behavior_time_string: time_string
+          }
+
+          // Sends the post message to the server which will let us update the
+          // currently displayed content
+          post(post_req)
+      }
+
+    </script>
+
+    <script>
+      $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+
+   
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+      <div class="container-fluid">
+        <a href="#" class="navbar-brand mr-3">info_shifts</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav">
+            <a href="#" class="nav-item nav-link active">Home</a>
+            <a href="https://docs.google.com/document/d/1CUKSLpmGGH_eGlaFypyD1UKZ1chKvkNIi0FOGEddWcU/edit#bookmark=kix.1dvejtjjjj4z" class="nav-item nav-link">Annotation Codebook</a>
+            <a role="button" href="#" class="nav-item nav-link openbtn" target_id="Statpanel" width = "475px" onclick="openNav(this.getAttribute('target_id'),this.getAttribute('width'))">Statistics</a>
+            <a role="button" href="#" class="nav-item nav-link openbtn" target_id="mySidepanel" onclick="openNav(this.getAttribute('target_id'))">Help</a>
+          </div>
+          <div class="p-2 bd-highlight text-secondary align-middle">
+            Finished {{finished}}/{{total_count}}
+          </div>
+          <div class="p-2 bd-highlight text-secondary align-middle">
+            Current_id {{instance_id}}
+          </div>
+          <div class="p-2 bd-highlight text-secondary align-middle">
+            <form action="/annotate" method="post">
+              <fieldset>
+                <input type="hidden" name="firstname" id="a" value="{{firstname}}">
+                <input type="hidden" name="lastname" id="b" value="{{lastname}}">
+                 <input type="hidden" name="email" id="c" value="{{username}}">
+                <input type="hidden" name="src" id="src" value="go_to">
+                <input type="number" name="go_to" id="go_to" value="" onfocusin="user_input()" onfocusout="user_input_leave()" max={{total_count}} min=0 required>
+                <input type="submit" value="go">
+              </fieldset>
+            </form>
+          </div>
+          <div class="navbar-nav ml-auto">
+            <div class="text-secondary align-middle">Currently logged in as {{username}}</div>
+          </div>
+        </div>
+      </div>    
+    </nav>
+    <div class="container-fluid">
+
+      <!--- LAYOUT GOES BELOW HERE --->
+
+      <div class="row">
+  <div class="col-md-12", style="z-index:999; position: -webkit-sticky;position: sticky;top: 0; background-color: #ffff;padding: 5px;font-size: 25px; line-height: 150%;">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div name="context_text" class="instance">
+          <div name="instance_text">
+            {{instance | safe}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div style="height: 15px;" />
+    
+  </div>
+  <div class="col-md-12">
+    <div class="annotation_schema", style="flex-flow: column wrap">
+      <form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Findings usually mention key elements or components of a study. Key elements could be affected people or demographics, objects or other components or variables in the finding.">1a. Compared to the paper finding, the reported finding changes one or more key elements (e.g., affected people or demographics, components, variables, treatments).</span></legend>      <input class="changes-key-entity" type="radio" id="changes-key-entity:::yes" name="changes-key-entity:::yes" value="1" onclick="onlyOne(this)" validation="required">  <label for="changes-key-entity:::yes" data-toggle="tooltip" data-html="true" data-placement="top" title="Key elements from the paper finding are changed. E.g., reporting that a finding applies to teenagers as opposed to toddlers or generalizing from dietary magnesium to unspecified magnesium intake.">yes</label>      <input class="changes-key-entity" type="radio" id="changes-key-entity:::no" name="changes-key-entity:::no" value="2" onclick="onlyOne(this)" validation="required">  <label for="changes-key-entity:::no" data-toggle="tooltip" data-html="true" data-placement="top" title="The reporting accurately covers all key elements.">no</label>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">1b. Click on the checkbox and mark the elements in the reported finding was added compared to the paper finding.</span></legend>      <input class="key-elements-added-in-reporting" type="checkbox" id="key-elements-added-in-reporting:::Added element in reported finding." name="span_label:::key-elements-added-in-reporting:::Added element in reported finding."  value="1" xchecked="checked" onclick="onlyOne(this); changeSpanLabel(this, 'Added element in reported finding.', '(204,121,167)');">  <label for="key-elements-added-in-reporting:::Added element in reported finding." ><span style="background-color:rgb(204,121,167,0.25);">Added element in reported finding.</span></label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">1c. Click on the checkbox and mark the elements in the paper finding that are missing in the reported finding.</span></legend>      <input class="key-elements-missing-in-the-reporting" type="checkbox" id="key-elements-missing-in-the-reporting:::Missing element from the reported finding." name="span_label:::key-elements-missing-in-the-reporting:::Missing element from the reported finding."  value="1" xchecked="checked" onclick="onlyOne(this); changeSpanLabel(this, 'Missing element from the reported finding.', '(0, 114,178)');">  <label for="key-elements-missing-in-the-reporting:::Missing element from the reported finding." ><span style="background-color:rgb(0, 114,178,0.25);">Missing element from the reported finding.</span></label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Generalizations are statements or elements in statements which claim that something is true all the time or for all instances which it is only true in some cases or sometimes.">2a. The reported finding generalizes the results while the paper is more specific.</span></legend>      <input class="Level-of-generality" type="radio" id="Level-of-generality:::yes" name="Level-of-generality:::yes" value="1" onclick="onlyOne(this)" validation="required">  <label for="Level-of-generality:::yes" data-toggle="tooltip" data-html="true" data-placement="top" title="E.g., the reporting generalizes a finding about diabetes type 2 in seniors to all people with diabetes. Or generalizing from a specified set of medical conditions ('reduced risk of stroke, heart failure, diabetes') to a general statement ('has health benefits').)">yes</label>      <input class="Level-of-generality" type="radio" id="Level-of-generality:::no" name="Level-of-generality:::no" value="2" onclick="onlyOne(this)" validation="required">  <label for="Level-of-generality:::no" data-toggle="tooltip" data-html="true" data-placement="top" title="The reporting accurately reports the finding with regards to the generality of the finding.">no</label>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">2b. Click the checkbox and mark the words or phrases in the reported finding that express the generalization.</span></legend>      <input class="key-elements" type="checkbox" id="key-elements:::Generalization" name="span_label:::key-elements:::Generalization"  value="1" xchecked="checked" onclick="onlyOne(this); changeSpanLabel(this, 'Generalization', '(213,94,0)');">  <label for="key-elements:::Generalization" ><span style="background-color:rgb(213,94,0,0.25);">Generalization</span></label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Certainty or uncertainty can be expressed with respect to various aspects. Things to look out for include: (un)certainty towards specific numbers/quantities (They found that approximately 50 % of participants …), the extent to which a given finding applies (The effect was mainly observed for teenagers.), the probability that something applies, occurs or is associated (... is possibly associated with …).">3a. In the reported finding, how do you rate the level of certainty the author uses to describe the finding?</span></legend>      <input class="how-certain-is-the-reported-finding" type="radio" id="how-certain-is-the-reported-finding:::Uncertain" name="how-certain-is-the-reported-finding:::Uncertain" value="1" onclick="onlyOne(this)" validation="required">  <label for="how-certain-is-the-reported-finding:::Uncertain" data-toggle="tooltip" data-html="true" data-placement="top" title="E.g., 'Sunscreen might prevent skin cancer.' or 'Overconsumption of sugar may have negative effects on health.', 'Further research is necessary to understand ...'">Uncertain</label><br/>      <input class="how-certain-is-the-reported-finding" type="radio" id="how-certain-is-the-reported-finding:::Somewhat uncertain" name="how-certain-is-the-reported-finding:::Somewhat uncertain" value="2" onclick="onlyOne(this)" validation="required">  <label for="how-certain-is-the-reported-finding:::Somewhat uncertain" data-toggle="tooltip" data-html="true" data-placement="top" title="E.g., 'Sunscreen could prevent skin cancer.' or 'Overconsumption of sugar can cause diabetes.', 'The functionality possibly depends on ....'">Somewhat uncertain</label><br/>      <input class="how-certain-is-the-reported-finding" type="radio" id="how-certain-is-the-reported-finding:::Somewhat certain" name="how-certain-is-the-reported-finding:::Somewhat certain" value="3" onclick="onlyOne(this)" validation="required">  <label for="how-certain-is-the-reported-finding:::Somewhat certain" data-toggle="tooltip" data-html="true" data-placement="top" title="E.g., 'Sunscreen can prevent skin cancer.' or 'The analysis suggests that papers with short titles receive more citations'">Somewhat certain</label><br/>      <input class="how-certain-is-the-reported-finding" type="radio" id="how-certain-is-the-reported-finding:::Certain" name="how-certain-is-the-reported-finding:::Certain" value="4" onclick="onlyOne(this)" validation="required">  <label for="how-certain-is-the-reported-finding:::Certain" data-toggle="tooltip" data-html="true" data-placement="top" title="E.g., 'Sunscreen prevents skin cancer.' or 'Papers with shorter titles get more citations', '... meaning that this treatment should be used ...'">Certain</label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Certainty or uncertainty can be expressed with respect to various aspects. Things to look out for include: (un)certainty towards specific numbers/quantities (They found that approximately 50 % of participants …), the extent to which a given finding applies (The effect was mainly observed for teenagers.), the probability that something applies, occurs or is associated (... is possibly associated with …).">3b. In the paper finding, how do you rate the level of certainty the author uses to describe the finding?</span></legend>      <input class="how-certain-is-the-paper-finding" type="radio" id="how-certain-is-the-paper-finding:::Uncertain" name="how-certain-is-the-paper-finding:::Uncertain" value="1" onclick="onlyOne(this)" validation="required">  <label for="how-certain-is-the-paper-finding:::Uncertain" data-toggle="tooltip" data-html="true" data-placement="top" title="E.g., 'Sunscreen might prevent skin cancer.' or 'Overconsumption of sugar may have negative effects on health.', 'Further research is necessary to understand ...'">Uncertain</label><br/>      <input class="how-certain-is-the-paper-finding" type="radio" id="how-certain-is-the-paper-finding:::Somewhat uncertain" name="how-certain-is-the-paper-finding:::Somewhat uncertain" value="2" onclick="onlyOne(this)" validation="required">  <label for="how-certain-is-the-paper-finding:::Somewhat uncertain" data-toggle="tooltip" data-html="true" data-placement="top" title="E.g., 'Sunscreen could prevent skin cancer.' or 'Overconsumption of sugar can cause diabetes.', 'The functionality possibly depends on ....'">Somewhat uncertain</label><br/>      <input class="how-certain-is-the-paper-finding" type="radio" id="how-certain-is-the-paper-finding:::Somewhat certain" name="how-certain-is-the-paper-finding:::Somewhat certain" value="3" onclick="onlyOne(this)" validation="required">  <label for="how-certain-is-the-paper-finding:::Somewhat certain" data-toggle="tooltip" data-html="true" data-placement="top" title="E.g., 'Sunscreen can prevent skin cancer.' or 'The analysis suggests that papers with short titles receive more citations'">Somewhat certain</label><br/>      <input class="how-certain-is-the-paper-finding" type="radio" id="how-certain-is-the-paper-finding:::Certain" name="how-certain-is-the-paper-finding:::Certain" value="4" onclick="onlyOne(this)" validation="required">  <label for="how-certain-is-the-paper-finding:::Certain" data-toggle="tooltip" data-html="true" data-placement="top" title="E.g., 'Sunscreen prevents skin cancer.' or 'Papers with shorter titles get more citations', '... meaning that this treatment should be used ...'">Certain</label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">3c. Click the checkbox and mark the words or phrases in the reported or paper finding that express the author's certainty.</span></legend>      <input class="certainty" type="checkbox" id="certainty:::Words indicating certainty" name="span_label:::certainty:::Words indicating certainty"  value="1" xchecked="checked" onclick="onlyOne(this); changeSpanLabel(this, 'Words indicating certainty', '(240,228,66)');">  <label for="certainty:::Words indicating certainty" data-toggle="tooltip" data-html="true" data-placement="top" title="This could be words like 'definitively', 'clearly', 'conclusively','undoubtedly'"><span style="background-color:rgb(240,228,66,0.25);">Words indicating certainty</span></label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">3d.  Click the checkbox and mark the words or phrases in the reported or paper finding that express the author's uncertainty.</span></legend>      <input class="uncertainty" type="checkbox" id="uncertainty:::Words indicating uncertainty" name="span_label:::uncertainty:::Words indicating uncertainty"  value="1" xchecked="checked" onclick="onlyOne(this); changeSpanLabel(this, 'Words indicating uncertainty', '(0,158,115)');">  <label for="uncertainty:::Words indicating uncertainty" data-toggle="tooltip" data-html="true" data-placement="top" title="This could be hedges like 'may', 'to some extent', 'probably', 'potentially', 'sometimes', 'possibly', 'mainly'."><span style="background-color:rgb(0,158,115,0.25);">Words indicating uncertainty</span></label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Sensational text intends to spark the interest of a reader, make them curious or elicit an emotional reaction.">4a. In the reported finding, how sensational is the language?</span></legend>      <input class="reporting-is-sensational" type="radio" id="reporting-is-sensational:::Neutral" name="reporting-is-sensational:::Neutral" value="1" onclick="onlyOne(this)" validation="required">  <label for="reporting-is-sensational:::Neutral" data-toggle="tooltip" data-html="true" data-placement="top" title="A neutral report of a scientific finding: 'Vitamin D intake can reduce stress.'">Neutral</label><br/>      <input class="reporting-is-sensational" type="radio" id="reporting-is-sensational:::Mostly neutral, slightly sensational" name="reporting-is-sensational:::Mostly neutral, slightly sensational" value="2" onclick="onlyOne(this)" validation="required">  <label for="reporting-is-sensational:::Mostly neutral, slightly sensational" data-toggle="tooltip" data-html="true" data-placement="top" title="A mostly neutral report of a scientific finding, but with some minor elements of sensational language or entertaining tone: 'New research suggests that upping your vitamin D intake could be a simple solution to alleviate stress.'">Mostly neutral, slightly sensational</label><br/>      <input class="reporting-is-sensational" type="radio" id="reporting-is-sensational:::Sensational" name="reporting-is-sensational:::Sensational" value="3" onclick="onlyOne(this)" validation="required">  <label for="reporting-is-sensational:::Sensational" data-toggle="tooltip" data-html="true" data-placement="top" title="A report of the finding that clearly uses sensationalist language used to grab the reader's attention: 'Revolutionary breakthrough: Experts have discovered that increasing your vitamin D intake can dramatically slash your stress levels!'">Sensational</label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Sensational text intends to spark the interest of a reader, make them curious or elicit an emotional reaction.">4b. In the paper finding, how sensational is the language?</span></legend>      <input class="paper-is-sensational" type="radio" id="paper-is-sensational:::Neutral" name="paper-is-sensational:::Neutral" value="1" onclick="onlyOne(this)" validation="required">  <label for="paper-is-sensational:::Neutral" data-toggle="tooltip" data-html="true" data-placement="top" title="A neutrally reported scientific finding: 'The evidence supports a link between vitamin D intake and reduced stress.'">Neutral</label><br/>      <input class="paper-is-sensational" type="radio" id="paper-is-sensational:::Mostly neutral, slightly sensational" name="paper-is-sensational:::Mostly neutral, slightly sensational" value="2" onclick="onlyOne(this)" validation="required">  <label for="paper-is-sensational:::Mostly neutral, slightly sensational" data-toggle="tooltip" data-html="true" data-placement="top" title="A mostly neutrally reported scientific finding, but with some minor elements of sensational language or entertaining tone: 'The empirical data provides compelling evidence that vitamin D supplementation can significantly alleviate stress levels, representing a groundbreaking discovery in stress management.'">Mostly neutral, slightly sensational</label><br/>      <input class="paper-is-sensational" type="radio" id="paper-is-sensational:::Sensational" name="paper-is-sensational:::Sensational" value="3" onclick="onlyOne(this)" validation="required">  <label for="paper-is-sensational:::Sensational" data-toggle="tooltip" data-html="true" data-placement="top" title="A paper finding that makes clear use of sensationalist language used in an effort to grab the reader's attention: 'We find remarkable evidence that reveals that vitamin D supplementation can dramatically alleviate stress levels, unveiling a groundbreaking solution in stress management.'">Sensational</label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">4c. Click on the checkbox and mark the words and phrases in the reported and/or paper finding that make the sentences sound sensationalist.</span></legend>      <input class="sensational-language-cues" type="checkbox" id="sensational-language-cues:::Sensational language" name="span_label:::sensational-language-cues:::Sensational language"  value="1" xchecked="checked" onclick="onlyOne(this); changeSpanLabel(this, 'Sensational language', '(86,180,233)');">  <label for="sensational-language-cues:::Sensational language" data-toggle="tooltip" data-html="true" data-placement="top" title="Sensationalist language or style that aims to grab the readers' attention. E.g., 'miracle treatment', 'breakthrough study', 'cure',  'game changer',  'groundbreaking',  'home run',  'life-changing',  'life-saving',  'marvel', 'revolutionary',  'transformative'"><span style="background-color:rgb(86,180,233,0.25);">Sensational language</span></label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Causality describes a cause-effect relationship between two things, variables, agents etc. A (directly) causes outcome B. Correlation describes relationships where two actions relate to each other, but one is not necessarily the effect or outcome of the other.">5a. In the reported finding, what type of causal relationship is described?</span></legend>      <input class="how-causal-is-the-reporting" type="radio" id="how-causal-is-the-reporting:::No relation is stated" name="how-causal-is-the-reporting:::No relation is stated" value="1" onclick="onlyOne(this)" validation="required">  <label for="how-causal-is-the-reporting:::No relation is stated" data-toggle="tooltip" data-html="true" data-placement="top" title="No causal or correlational relation of any kind.">No relation is stated</label>      <input class="how-causal-is-the-reporting" type="radio" id="how-causal-is-the-reporting:::Correlation" name="how-causal-is-the-reporting:::Correlation" value="2" onclick="onlyOne(this)" validation="required">  <label for="how-causal-is-the-reporting:::Correlation" data-toggle="tooltip" data-html="true" data-placement="top" title="The reported finding describes a correlation between two elements. E.g., 'Vitamin D levels are associated with extensive tiredness'">Correlation</label>      <input class="how-causal-is-the-reporting" type="radio" id="how-causal-is-the-reporting:::Causation" name="how-causal-is-the-reporting:::Causation" value="3" onclick="onlyOne(this)" validation="required">  <label for="how-causal-is-the-reporting:::Causation" data-toggle="tooltip" data-html="true" data-placement="top" title="The reported finding describes a causal relation between two elements. E.g., 'Low vitamin D levels cause extensive tiredness' or 'Tiredness might be caused by lack of vitamin D.'">Causation</label>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Causality describes a cause-effect relationship between two things, variables, agents etc. A (directly) causes outcome B. Correlation describes relationships where two actions relate to each other, but one is not necessarily the effect or outcome of the other.">5b. In the paper finding, what type of causal relationship is described?</span></legend>      <input class="how-causal-is-the-paper-finding" type="radio" id="how-causal-is-the-paper-finding:::No relation is stated" name="how-causal-is-the-paper-finding:::No relation is stated" value="1" onclick="onlyOne(this)" validation="required">  <label for="how-causal-is-the-paper-finding:::No relation is stated" data-toggle="tooltip" data-html="true" data-placement="top" title="No causal or correlational relation of any kind.">No relation is stated</label>      <input class="how-causal-is-the-paper-finding" type="radio" id="how-causal-is-the-paper-finding:::Correlation" name="how-causal-is-the-paper-finding:::Correlation" value="2" onclick="onlyOne(this)" validation="required">  <label for="how-causal-is-the-paper-finding:::Correlation" data-toggle="tooltip" data-html="true" data-placement="top" title="The paper finding describes a correlation between two elements. E.g., 'Vitamin D levels are associated with extensive tiredness'">Correlation</label>      <input class="how-causal-is-the-paper-finding" type="radio" id="how-causal-is-the-paper-finding:::Causation" name="how-causal-is-the-paper-finding:::Causation" value="3" onclick="onlyOne(this)" validation="required">  <label for="how-causal-is-the-paper-finding:::Causation" data-toggle="tooltip" data-html="true" data-placement="top" title="The paper finding describes a causal relation between two elements. E.g., 'Low vitamin D levels cause extensive tiredness' or 'Tiredness might be caused by lack of vitamin D.'">Causation</label>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">5c. Click on the checkbox and mark the words and phrases in the reported and/or the paper finding that express the causal relation.</span></legend>      <input class="causality-reporting" type="checkbox" id="causality-reporting:::Causation" name="span_label:::causality-reporting:::Causation"  value="1" xchecked="checked" onclick="onlyOne(this); changeSpanLabel(this, 'Causation', '(230,159,0)');">  <label for="causality-reporting:::Causation" data-toggle="tooltip" data-html="true" data-placement="top" title="X causes Y. E.g., 'Overconsumption of sugar leads to diabetes.' "><span style="background-color:rgb(230,159,0,0.25);">Causation</span></label><br/>  </fieldset>
+</form>
+
+<form action="/action_page.php">  <fieldset>  <legend><span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">5d. Click on the checkbox and mark the words and phrases in the reported and/or the paper finding that express the correlational relation.</span></legend>      <input class="correlation-reporting" type="checkbox" id="correlation-reporting:::Correlation" name="span_label:::correlation-reporting:::Correlation"  value="1" xchecked="checked" onclick="onlyOne(this); changeSpanLabel(this, 'Correlation', '(78,76,74)');">  <label for="correlation-reporting:::Correlation" data-toggle="tooltip" data-html="true" data-placement="top" title="X is associated with Y. E.g., 'It is likely that there is a link between overconsumption of sugar and the onset of diabetes.'"><span style="background-color:rgb(78,76,74,0.25);">Correlation</span></label><br/>  </fieldset>
+</form>
+
+
+    </div>
+  </div>
+</div>
+
+
+      <!--- LAYOUT GOES ABOVE  --->
+
+      <div>
+        <p>
+          <div class="text-center">
+            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_prev()">Move backward</a>
+            <a class="btn btn-secondary" href="#" role="button" onclick="click_to_next()">Move forward</a>
+          </div>
+        </p>        
+      </div>
+
+      <hr>
+      <footer>
+        <div class="row">
+          <div class="col-md-6">
+            <p>Copyright &copy; 2022 <a href="https://blablablab.si.umich.edu/">Blablablab</a> </p>
+          </div>
+          <div class="col-md-12 text-md-right">
+            <a href="https://github.com/davidjurgens/potato" class="text-dark">Fork on GitHub</a>
+            <span class="text-muted mx-2">|</span> 
+            <a href="https://github.com/davidjurgens/potato#cite-us" class="text-dark">Cite Us</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      /* Set the width of the sidebar to 250px (show it) */
+      function openNav(target_id, width = "350px") {
+          document.getElementById(target_id).style.width = width;
+      }
+      
+      /* Set the width of the sidebar to 0 (hide it) */
+      function closeNav(target_id) {
+          document.getElementById(target_id).style.width = "0";
+      }
+
+      function closeNav2(target_id) {
+          // document.getElementById(target_id).style.height = "20px";
+          console.error(document.getElementById(target_id).style.display);
+          if (document.getElementById(target_id).style.display == "block" 
+              || document.getElementById(target_id).style.display == "") {
+              
+              document.getElementById(target_id).style.display = "none";
+              localStorage.setItem('show_instructions', 'false'); 
+          }
+          else{
+              document.getElementById(target_id).style.display = "block";
+              localStorage.setItem('show_instructions', 'true'); 
+          }
+      }
+
+      /* Keep the instructions hidden/shown across instance transitions based on
+         what the user had selected */      
+      window.onload = function() {
+          var show = localStorage.getItem('show_instructions');
+          if (document.getElementById('instructions')) {
+              if (show === 'true') {
+                  document.getElementById('instructions').style.display = "block";
+              }
+              else {
+                  document.getElementById('instructions').style.display = "none";
+              }
+          }
+      }      
+
+    </script>
+  </body>
+</html>
