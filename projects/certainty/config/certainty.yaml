@@ -24,7 +24,7 @@
 
     "data_files": [
       "data/all-data-to-be-annotated/Medicine/separated/Medicine_missing.tsv",
-      #"data/all-data-to-be-annotated/Medicine/separated/Medicine.tsv"
+      "data/all-data-to-be-annotated/Medicine/separated/Medicine.tsv"
     ],
 
     "item_properties": {
@@ -80,7 +80,7 @@
       "output_filename": "task_assignment.json",
       "sampling_strategy": "ordered", #"random" is the alternative
       "labels_per_instance": 1,
-      "instance_per_annotator": 3,
+      "instance_per_annotator": 5,
       "test_question_per_annotator": 2,
       "users": [ ]
     },
