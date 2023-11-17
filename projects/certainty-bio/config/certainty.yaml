@@ -24,7 +24,7 @@
 
     "data_files": [
       "data/all-data-to-be-annotated/Biology/separated/Biology_missing.tsv",
-      "data/all-data-to-be-annotated/Biology/separated/Biology.tsv"
+      #"data/all-data-to-be-annotated/Biology/separated/Biology.tsv"
       
     ],
 
@@ -81,7 +81,7 @@
       "output_filename": "task_assignment.json",
       "sampling_strategy": "ordered", #"random" is the alternative
       "labels_per_instance": 1,
-      "instance_per_annotator": 12,
+      "instance_per_annotator": 2,
       "test_question_per_annotator": 2,
       "users": [ ]
     },
