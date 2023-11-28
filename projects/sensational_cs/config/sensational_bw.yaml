@@ -1,0 +1,208 @@
+{
+    "port": 9001,
+
+    "server_name": "potato annotator",
+
+    "annotation_task_name": "MostVSLeast Sensational: Computer Science",
+
+    # Potato will write the annotation file for all annotations to this
+    # directory, as well as per-annotator output files and state information
+    # necessary to restart annotation.
+    "output_annotation_dir": "projects/sensational_cs/annotation_output/",
+
+    # The output format for the all-annotator data. Allowed formats are:
+    # * jsonl
+    # * json (same output as jsonl)
+    # * csv
+    # * tsv
+    #
+    "output_annotation_format": "tsv",
+
+    # If annotators are using a codebook, this will be linked at the top to the
+    # instance for easy access
+    "annotation_codebook_url": "https://docs.google.com/document/d/1GU5A631DKhbKxqwYtKovf-JnFhWHKqui-VKpyL5WDfs/edit?usp=sharing",
+
+    "data_files": [
+      "data/all-data-to-be-annotated/Computer_Science/separated/bws_Computer_Science.tsv",
+      
+    ],
+
+    "item_properties": {
+        "id_key": "id",
+        "text_key": "text"
+    },
+
+
+
+    "surveyflow": {
+      "on": true,
+      "order": [
+        "pre_annotation",
+        "post_annotation"
+      ],
+      "pre_annotation": [
+        "projects/sensational_cs/surveyflow/Welcome.jsonl",
+        "projects/sensational_cs/surveyflow/MostVsLeast Sensationalist Task.jsonl",
+        "projects/sensational_cs/surveyflow/Sensationalism.jsonl",
+        "projects/sensational_cs/surveyflow/MostVsLeast Sensationalist Examples.jsonl",
+        "projects/sensational_cs/surveyflow/Navigation MostVsLeast Sensationalist.jsonl",
+        "projects/sensational_cs/surveyflow/Consent.jsonl",
+      ],
+      "post_annotation": [
+          "projects/sensational_cs/surveyflow/Experience.jsonl",
+          "projects/sensational_cs/surveyflow/End.jsonl",
+
+
+      ],
+      "testing": [
+             "projects/sensational_cs/surveyflow/attention-sensational-bws.jsonl",
+
+      ]
+    },
+
+
+
+    "user_config": {
+
+      "allow_all_users": True,
+      
+      "users": [  ],
+    },
+
+    #list_as_text is used when the input text is actually a list of texts, usually used for best-worst-scaling or dialogue analysis
+    "list_as_text": {
+      "text_list_prefix_type": 'none', #whether automatically insert a prefix for each line, currently supporting 'number', 'alphabet', 'number'
+      "horizontal": True,
+    },
+
+    "automatic_assignment": {
+      "on": true,
+      "output_filename": "task_assignment.json",
+      "sampling_strategy": "ordered", #"random" is the alternative
+      "labels_per_instance": 2,
+      "instance_per_annotator": 10,
+      "test_question_per_annotator": 2,
+      "users": [ ]
+    },
+
+    # How many seconds do you want the annotators spend on each instance, after
+    # that, an alert will be sent per alert_time_each_instance seconds.
+    "alert_time_each_instance": 10000000,
+
+    "annotation_schemes": [
+
+      # Changes in Sensationalism
+      {
+        "annotation_type": "radio",
+        "name": "most-neutral",
+        "label_requirement": {"required":true},
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Sensational text intends to spark the interest of a reader, make them curious or elicit an emotional reaction.">Which of the findings is the LEAST sensational?</span>',
+        #"horizontal": True,
+          "labels": [
+            {
+              "name": "A",
+              "tooltip": "Finding A is the least sensational."
+            },
+            {
+              "name": "B",
+              "tooltip": "Finding B is the least sensational."
+            },
+            {
+              "name": "C",
+              "tooltip": "Finding C is the least sensational."
+            },
+            {
+              "name": "D",
+              "tooltip": "Finding D is the least sensational."
+            },
+
+          ],
+        # If true, numbers [1-len(labels)] will be bound to each
+        # label. Check box annotations with more than 10 are not supported
+        # with this simple keybinding and will need to use the full item
+        # specification to bind all labels to keys.
+        "sequential_key_binding": True,
+      },
+
+      {
+        "annotation_type": "radio",
+        "name": "most-sensational",
+        "label_requirement": {"required":true},
+        "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="Sensational text intends to spark the interest of a reader, make them curious or elicit an emotional reaction.">Which of the findings is the MOST sensational?</span>',
+        #"horizontal": True,
+          "labels": [
+            {
+              "name": "A",
+              "tooltip": "Finding A is the most sensational."
+            },
+            {
+              "name": "B",
+              "tooltip": "Finding B is the most sensational."
+            },
+            {
+              "name": "C",
+              "tooltip": "Finding C is the most sensational."
+            },
+            {
+              "name": "D",
+              "tooltip": "Finding D is the most sensational."
+            },
+
+          ],
+        # If true, numbers [1-len(labels)] will be bound to each
+        # label. Check box annotations with more than 10 are not supported
+        # with this simple keybinding and will need to use the full item
+        # specification to bind all labels to keys.
+        "sequential_key_binding": True,
+      },
+
+
+
+        ],
+
+
+    # The html that changes the visualiztation for your task. Change this file
+    # to influence the layout and description of your task. This is not a full
+    # HTML page, just the piece that does lays out your task's pieces
+    #"html_layout": "templates/examples/plain_layout.html",
+    "html_layout": "projects/sensational_cs/templates/bw_scaling_plain_html_templ.html",
+
+    # The core UI files for Potato. You should not need to change these normally.
+    #
+    # Exceptions to this might include:
+    # 1) You want to add custom CSS/fonts to style your task
+    # 2) Your layout requires additional JS/assets to render
+    # 3) You want to support additional keybinding magic
+    #
+    "base_html_template": "templates/base_template.html",
+    "header_file": "templates/header.html",
+
+    # This is where the actual HTML files will be generated
+    "site_dir": "potato/templates/",
+    #"site_dir": "projects/sensational_cs/templates/",
+
+  #defining the ways annotators entering the annotation system
+    "login": {
+        "type": 'url_direct',    #can be 'password' or 'url_direct'
+        "url_argument": 'PROLIFIC_PID' # when the login type is set to 'url_direct', 'url_argument' must be setup for a direct url argument login
+    },
+
+    "ui": {
+      "spans": {
+        "span_colors":
+          {
+            "Added element in reported finding.": "(204,121,167)",
+            "Missing element from the reported finding.": "(0, 114,178)",
+            "Generalization": "(213,94,0)",
+            "Words indicating certainty": "(240,228,66)",
+            "Words indicating uncertainty": "(0,158,115)",
+            "Sensational language": "(86,180,233)",
+            "Causation": "(230,159,0)",
+            "Correlation": "(78,76,74)",
+            "Explicit mentions of no relation": "(172,238,180)",
+          }
+      }
+    }
+
+
+}
