@@ -23,7 +23,8 @@
     "annotation_codebook_url": "https://docs.google.com/document/d/1GU5A631DKhbKxqwYtKovf-JnFhWHKqui-VKpyL5WDfs/edit?usp=sharing",
 
     "data_files": [
-      "data/all-data-to-be-annotated/Biology/separated/bws_Biology.tsv",
+      "data/all-data-to-be-annotated/Biology/separated/bws_Biology_missing.tsv",
+      #"data/all-data-to-be-annotated/Biology/separated/bws_Biology.tsv",
       
     ],
 
