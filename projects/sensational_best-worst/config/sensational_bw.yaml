@@ -3,7 +3,7 @@
 
     "server_name": "potato annotator",
 
-    "annotation_task_name": "MostVSLeast Sensational: medical",
+    "annotation_task_name": "MostVSLeast Sensational: Medicine",
 
     # Potato will write the annotation file for all annotations to this
     # directory, as well as per-annotator output files and state information
