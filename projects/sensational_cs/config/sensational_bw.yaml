@@ -81,7 +81,7 @@
       "output_filename": "task_assignment.json",
       "sampling_strategy": "ordered", #"random" is the alternative
       "labels_per_instance": 1,
-      "instance_per_annotator": 7,
+      "instance_per_annotator": 3,
       "test_question_per_annotator": 2,
       "users": [ ]
     },
