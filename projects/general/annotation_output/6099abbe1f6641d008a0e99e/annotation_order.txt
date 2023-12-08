@@ -1,0 +1,22 @@
+Welcome.html
+Task.html
+Generalization.html
+Generalization Examples.html
+Navigation.html
+Consent.html
+test_question_testing_They are at the same level of generality
+Medicine_15
+Medicine_tweet_20
+Medicine_tweet_60
+Medicine_tweet_18
+Medicine_tweet_85
+Medicine_tweet_0
+Medicine_tweet_34
+Medicine_tweet_213
+Medicine_50
+test_question_testing_Finding A
+Medicine_tweet_163
+Medicine_tweet_38
+Medicine_tweet_3
+Experience.html
+End.html

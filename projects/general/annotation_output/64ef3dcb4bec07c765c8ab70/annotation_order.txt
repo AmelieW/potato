@@ -1,0 +1,22 @@
+Welcome.html
+Task.html
+Generalization.html
+Generalization Examples.html
+Navigation.html
+Consent.html
+Medicine_98
+test_question_testing_Finding B
+Medicine_tweet_117
+Medicine_66
+Medicine_tweet_49
+Medicine_125
+Medicine_337
+Medicine_92
+Medicine_tweet_74
+Medicine_tweet_22
+Medicine_507
+Medicine_294
+test_question_testing_They are at the same level of generality
+Medicine_tweet_37
+Experience.html
+End.html

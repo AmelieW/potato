@@ -1,0 +1,22 @@
+Welcome.html
+Task.html
+Generalization.html
+Generalization Examples.html
+Navigation.html
+Consent.html
+Medicine_tweet_298
+Medicine_3
+test_question_testing_Finding A
+Medicine_268
+Medicine_104
+test_question_testing_Finding B
+Medicine_tweet_1
+Medicine_401
+Medicine_tweet_24
+Medicine_402
+Medicine_tweet_13
+Medicine_56
+Medicine_tweet_68
+Medicine_71
+Experience.html
+End.html
