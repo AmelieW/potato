@@ -3,7 +3,7 @@
 
     "server_name": "potato annotator",
 
-    "annotation_task_name": "Generalization",
+    "annotation_task_name": "Generalization: Medicine",
 
     # Potato will write the annotation file for all annotations to this
     # directory, as well as per-annotator output files and state information
@@ -23,8 +23,7 @@
     "annotation_codebook_url": "https://docs.google.com/document/d/1z2i_ATwuI21Q_WL1YHjM5qWR0LQqNCVxjZ2r-ljhLsk/edit?usp=sharing",
 
     "data_files": [
-      "projects/general/data/pilot/medicine/score_[4, 5]_batch_3_fixed_context.tsv",
-      "projects/general/data/pilot/medicine/score_[4, 5]_batch_3_backup_instances_fixed_context.tsv",
+      "data/all-data-to-be-annotated/Medicine/paired/Medicine.tsv"
     ],
 
     "item_properties": {
@@ -79,8 +78,8 @@
       "on": true,
       "output_filename": "task_assignment.json",
       "sampling_strategy": "ordered", #"random" is the alternative
-      "labels_per_instance": 10,
-      "instance_per_annotator": 6,
+      "labels_per_instance": 3,
+      "instance_per_annotator": 12,
       "test_question_per_annotator": 2,
       "users": [ ]
     },
@@ -99,16 +98,16 @@
         "horizontal": True,
           "labels": [
             {
-              "name": "Paper finding",
-              "tooltip": "E.g., the paper finding discusses a general finding about diabetes, while the report discusses the finding for a specific demographic only. Or generalizing from a specified set of medical conditions ('reduced risk of stroke, heart failure, diabetes') to a general statement ('has health benefits').)"
+              "name": "Finding A",
+              "tooltip": "E.g., Finding A discusses a general finding about diabetes, while the report discusses the finding for a specific demographic only. Or generalizing from a specified set of medical conditions ('reduced risk of stroke, heart failure, diabetes') to a general statement ('has health benefits').)"
             },
             {
-              "name": "Reported finding",
-              "tooltip": "E.g., the reporting generalizes a finding about diabetes type 2 in seniors to all people with diabetes. Or generalizing from a specified set of medical conditions ('reduced risk of stroke, heart failure, diabetes') to a general statement ('has health benefits').)"
+              "name": "Finding B",
+              "tooltip": "E.g., Finding B generalizes a finding about diabetes type 2 in seniors to all people with diabetes. Or generalizing from a specified set of medical conditions ('reduced risk of stroke, heart failure, diabetes') to a general statement ('has health benefits').)"
             },
             {
               "name": "They are at the same level of generality",
-              "tooltip": "The reporting accurately reports the finding with regards to the generality of the finding."
+              "tooltip": "Finding B accurately reports the Finding A with regards to generality."
             }
           ],
         # If true, numbers [1-len(labels)] will be bound to each
@@ -117,22 +116,6 @@
         # specification to bind all labels to keys.
         "sequential_key_binding": True,
       },
-
-        {
-            "annotation_type": "highlight",
-            "name": "generalization",
-            "description": '<span data-toggle="tooltip" data-html="true" data-placement="bottom" title="To delete your annotation, double-click the highlighting in the text.">Click the checkbox and mark the words or phrases in the respective finding that express the generalization.</span>',
-            "labels": [
-              {"name":"Generalization",
-              "tooltip": "E.g., female users to users, diabetes type 2 to diabetes, gradient decent to optimization algorithm."},
-            ],
-
-          # If true, numbers [1-len(labels)] will be bound to each
-          # label. Highlight selection annotations with more than 10 are not supported
-          # with this simple keybinding and will need to use the full item
-          # specification to bind all labels to keys.
-            "sequential_key_binding": True,
-        },
 
 
 
