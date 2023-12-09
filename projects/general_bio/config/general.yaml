@@ -23,7 +23,7 @@
     "annotation_codebook_url": "https://docs.google.com/document/d/1z2i_ATwuI21Q_WL1YHjM5qWR0LQqNCVxjZ2r-ljhLsk/edit?usp=sharing",
 
     "data_files": [
-      "data/all-data-to-be-annotated/Biology/paired/Biology.tsv"
+      "data/all-data-to-be-annotated/Biology/paired/Biology_missing.tsv"
     ],
 
     "item_properties": {
